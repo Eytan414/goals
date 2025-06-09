@@ -3,8 +3,10 @@ import Dexie, { Table } from 'dexie';
 
 export interface Category {
   id?: number;
+  createdAt?: Date;
   name: string;
   value: number;
+  //consider adding weight
 }
 
 class DB extends Dexie {
@@ -22,8 +24,11 @@ const db = new DB();
 
 @Injectable({ providedIn: 'root' })
 export class DBService {
+  //switch to signals
+  //add get partial for specific date
   async addCategory(category: Category): Promise<number> {
-    return await db.categories.add({ name: category.name, value: category.value });
+    const { name, value } = category;
+    return await db.categories.add({ name, value, createdAt: new Date() });
   }
 
   async getCategory(): Promise<Category[]> {

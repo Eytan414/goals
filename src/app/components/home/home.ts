@@ -12,12 +12,10 @@ import { AsyncPipe, JsonPipe } from '@angular/common';
   styleUrl: './home.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class Home implements OnInit{
+export class Home {
   db = inject(DBService);
-  data$ = this.db.getCategory();
-  
 
-  ngOnInit(): void {
-  }
+  data$ = this.db.getCategory();
+
 
 }

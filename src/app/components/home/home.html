@@ -3,9 +3,16 @@
 </header>
 
 <main>
+    <!-- TODO: perhaps add calendar and show daily -->
+
+
+    <!-- TODO: style, maybe as table -->
     @for(c of data$ | async; track $index){
-        <div>
-            {{c | json}}
-        </div>
+    <div>
+        {{c | json}}
+    </div>
     }
+    <!-- TODO: de/increment btn's +- -->
+    
+    <!-- TODO: add category btn -->
 </main>
