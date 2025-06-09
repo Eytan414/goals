@@ -1,0 +1,11 @@
+<header>
+    fill out with something
+</header>
+
+<main>
+    @for(c of data$ | async; track $index){
+        <div>
+            {{c | json}}
+        </div>
+    }
+</main>
