@@ -5,22 +5,17 @@ import { AppService } from './app-service';
 @Injectable({ providedIn: 'root' })
 export class DBService {
   private readonly appService = inject(AppService);
-
-
-  async addNewCategory(category: Category) {
-    await db.categories.add(category);
-  }
-
-
-  async updateRecordValueByDateAndCategory(newRecord: CategoryRecord) {
-
-  }
+  
+  // async addNewCategory(category: Category) {
+  //   await db.categories.add(category);
+  // }
+  
   async updateRecord(newRecord: CategoryRecord) {
     await db.records.put(newRecord);
-    this.refetchUpdatedRecordsByDate(this.appService.selectedDate());
+    this.reloadRecords(this.appService.selectedDate());
   }
 
-  async refetchUpdatedRecordsByDate(date: string) {
+  async reloadRecords(date: string) {
     const chosenDateRecords = await db.records
       .where("date")
       .equals(date)

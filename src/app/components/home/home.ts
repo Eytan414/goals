@@ -1,18 +1,14 @@
-import { ChangeDetectionStrategy, Component, effect, inject, OnInit, signal } from '@angular/core';
-import { DBService, CategoryRecord, Category } from '../../services/db';
-import { AsyncPipe, DatePipe, JsonPipe } from '@angular/common';
+import { ChangeDetectionStrategy, Component, effect, inject, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { AppService } from '../../services/app-service';
+import { DBService, CategoryRecord } from '../../services/db';
 import { CategoryIdToNamePipe } from '../../pipes/category-id-to-name-pipe';
 
 @Component({
   selector: 'app-home',
   imports: [
-    DatePipe,
-    JsonPipe,
     FormsModule,
-    CategoryIdToNamePipe,
-    
+    CategoryIdToNamePipe,    
   ],
   templateUrl: './home.html',
   styleUrl: './home.scss',
@@ -35,18 +31,18 @@ export class Home implements OnInit {
     this.appService.selectedDate.set(date);
   }
 
-  decrement(c: CategoryRecord) {
+  decrement(record: CategoryRecord) {
     const newValue = {
-      ...c,
-      value: c.value - 1
+      ...record,
+      value: record.value - 1
     }
     this.db.updateRecord(newValue);
   }
 
-  increment(r: CategoryRecord) {
+  increment(record: CategoryRecord) {
     const newValue = {
-      ...r,
-      value: r.value + 1
+      ...record,
+      value: record.value + 1
     }
     this.db.updateRecord(newValue);
   }
