@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, effect, inject, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { AppService } from '../../services/app-service';
-import { DBService, CategoryRecord } from '../../services/db';
+import { DBService, CategoryRecord, Category } from '../../services/db';
 import { CategoryIdToNamePipe } from '../../pipes/category-id-to-name-pipe';
 import { DecrementBtn } from '../decrement-btn/decrement-btn';
 import { IncrementBtn } from '../increment-btn/increment-btn';

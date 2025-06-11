@@ -5,11 +5,11 @@ import { AppService } from './app-service';
 @Injectable({ providedIn: 'root' })
 export class DBService {
   private readonly appService = inject(AppService);
-  
+
   // async addNewCategory(category: Category) {
   //   await db.categories.add(category);
   // }
-  
+
   async updateRecord(newRecord: CategoryRecord) {
     await db.records.put(newRecord);
     this.reloadRecords(this.appService.selectedDate());
@@ -80,10 +80,10 @@ class DB extends Dexie {
 
   constructor() {
     super('Database');
-    this.version(1).stores({
+    this.version(9).stores({
       records: '++id, categoryId, value, date',
       categories: '++id, name, weight',
-    });
+    })
   }
 }
 const db = new DB();
