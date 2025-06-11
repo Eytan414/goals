@@ -3,12 +3,16 @@ import { FormsModule } from '@angular/forms';
 import { AppService } from '../../services/app-service';
 import { DBService, CategoryRecord } from '../../services/db';
 import { CategoryIdToNamePipe } from '../../pipes/category-id-to-name-pipe';
+import { DecrementBtn } from '../decrement-btn/decrement-btn';
+import { IncrementBtn } from '../increment-btn/increment-btn';
 
 @Component({
   selector: 'app-home',
   imports: [
     FormsModule,
-    CategoryIdToNamePipe,    
+    CategoryIdToNamePipe,
+    IncrementBtn,
+    DecrementBtn,
   ],
   templateUrl: './home.html',
   styleUrl: './home.scss',
@@ -31,20 +35,5 @@ export class Home implements OnInit {
     this.appService.selectedDate.set(date);
   }
 
-  decrement(record: CategoryRecord) {
-    const newValue = {
-      ...record,
-      value: record.value - 1
-    }
-    this.db.updateRecord(newValue);
-  }
-
-  increment(record: CategoryRecord) {
-    const newValue = {
-      ...record,
-      value: record.value + 1
-    }
-    this.db.updateRecord(newValue);
-  }
 
 }
