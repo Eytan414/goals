@@ -1,19 +1,21 @@
 <main>
-    <input type="date" [(ngModel)]="appService.selectedDate" (ngModelChange)="onDateChange($event)" [max]="appService.today" />
-    @let record = appService.selectedDateRecord();
+    <input type="date" [(ngModel)]="appService.selectedDate" (ngModelChange)="onDateChange($event)"
+        [max]="appService.today" />
+    @let records = appService.selectedDateRecords();
     <div class="categories">
-        @for(c of appService.categories(); track $index){
-        <div>
-            <!-- <button (click)="increment(c)">+</button> -->
-            {{c.name }}:
-            @if(record){}
-            <!-- <button (click)="decrement(c)">-</button> -->
+        @for(r of records; track r.id){
+        <div class="record">
+            <button (click)="decrement(r)">-</button>
+            {{r.categoryId | categoryIdToName}}
+            :
+            {{r.value}}
+            <button (click)="increment(r)">+</button>
         </div>
-        <hr />
-    }
-</div>
+        <!-- <hr /> -->
+        }
+    </div>
 
-<hr />
+    <hr />
 
 
 

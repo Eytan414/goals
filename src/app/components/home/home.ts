@@ -3,13 +3,16 @@ import { DBService, CategoryRecord, Category } from '../../services/db';
 import { AsyncPipe, DatePipe, JsonPipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { AppService } from '../../services/app-service';
+import { CategoryIdToNamePipe } from '../../pipes/category-id-to-name-pipe';
 
 @Component({
   selector: 'app-home',
   imports: [
     DatePipe,
     JsonPipe,
-    FormsModule
+    FormsModule,
+    CategoryIdToNamePipe,
+    
   ],
   templateUrl: './home.html',
   styleUrl: './home.scss',
@@ -39,11 +42,13 @@ export class Home implements OnInit {
     }
     this.db.updateRecord(newValue);
   }
-  increment(c: Category) {
-    const categoryId = c.id!;
-    // categoryId
-    // this.displayedDate()
-    // this.db.updateRecord(newValue);
+
+  increment(r: CategoryRecord) {
+    const newValue = {
+      ...r,
+      value: r.value + 1
+    }
+    this.db.updateRecord(newValue);
   }
 
 }
