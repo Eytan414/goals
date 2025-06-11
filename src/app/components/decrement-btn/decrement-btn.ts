@@ -14,6 +14,7 @@ export class DecrementBtn {
   record = input.required<CategoryRecord>();
   
   decrement(record: CategoryRecord) {
+    if(record.value === 0) return;
     const newValue = {
       ...record,
       value: record.value - 1
