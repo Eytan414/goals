@@ -5,6 +5,7 @@ import { DBService, CategoryRecord, Category } from '../../services/db';
 import { CategoryIdToNamePipe } from '../../pipes/category-id-to-name-pipe';
 import { DecrementBtn } from '../decrement-btn/decrement-btn';
 import { IncrementBtn } from '../increment-btn/increment-btn';
+import { ChangeDate } from '../change-date/change-date';
 
 @Component({
   selector: 'app-home',
@@ -13,6 +14,7 @@ import { IncrementBtn } from '../increment-btn/increment-btn';
     CategoryIdToNamePipe,
     IncrementBtn,
     DecrementBtn,
+    ChangeDate,
   ],
   templateUrl: './home.html',
   styleUrl: './home.scss',
@@ -35,7 +37,7 @@ export class Home implements OnInit {
     this.appService.selectedDate.set(date);
   }
 
-  weightedScore(): string {
+  weightedScore(): number {
     const records = this.appService.selectedDateRecords();
     const categories = this.appService.categories();
     let total = 0;
@@ -43,6 +45,6 @@ export class Home implements OnInit {
       const catagory = categories.find(c => c.id === r.categoryId);
       total += (r.value * catagory!.weight)
     })
-    return String(total);
+    return total;
   }
 }

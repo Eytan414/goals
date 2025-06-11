@@ -10,6 +10,24 @@ main {
     width: fit-content;
     justify-self: center;
 
+    .date-selection {
+        display: flex;
+        align-items: center;
+        justify-content: space-evenly;
+        width: 100%;
+        
+        > *{
+            outline: none;
+        }
+        
+
+        input {
+            justify-self: center;
+            padding: .5rem;
+            cursor: pointer;
+        }
+    }
+
     .categories {
         display: grid;
         grid-template-columns: 1fr 1fr;
@@ -28,10 +46,16 @@ main {
         }
     }
 
-    input {
-        justify-self: start;
-        padding: .5rem;
-        cursor: pointer;
+    .summary {
+        font-weight: bold;
+
+        &.bad {
+            color: red;
+        }
+
+        &.good {
+            color: green;
+        }
     }
 
 }

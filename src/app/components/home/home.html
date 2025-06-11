@@ -1,20 +1,33 @@
 <main>
-    <input type="date" [(ngModel)]="appService.selectedDate" (ngModelChange)="onDateChange($event)"
-        [max]="appService.today" />
+    <section class="date-selection">
+        <change-date direction="back"/>
+        <input type="date" name="date" [(ngModel)]="appService.selectedDate" (ngModelChange)="onDateChange($event)"
+            [max]="appService.today" />
+        <change-date direction="forward"/>
+
+        <!-- consider add time to day end in case stay with utc+0 (current) -->
+    </section>
+
     @let records = appService.selectedDateRecords();
-    <div class="categories">
+    <section class="categories">
         @for(r of records; track r.id){
         <div class="record">
-            <decrement-btn [record]="r"/>
+            <decrement-btn [record]="r" />
             {{r.categoryId | categoryIdToName}}
             :
             {{r.value}}
-            <increment-btn [record]="r"/>
+            <increment-btn [record]="r" />
         </div>
         }
-    </div>
-    <div class="sum">
-        weighted score: {{weightedScore()}}
-    </div>
-    <!-- TODO: add mangae categories section -->
+    </section>
+
+    @let score = weightedScore();
+    <section [class]="{'bad': score < 0, 'good': score >= 15 }" class="summary">
+        weighted score:
+        <span> {{ score }}</span>
+    </section>
+
+    <section>
+        <!-- TODO: add mangae categories section -->
+    </section>
 </main>
