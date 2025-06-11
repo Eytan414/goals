@@ -26,9 +26,9 @@ export class DBService {
       .equals(date)
       .toArray();
 
-    this.appService.selectedDateRecord.set(chosenDateRecords);
+    this.appService.selectedDateRecords.set(chosenDateRecords);
   }
-  
+
   async fetchRecordsByDate(date: string) {
     let categories = this.appService.categories();
     const chosenDateRecords = await db.records
@@ -41,7 +41,7 @@ export class DBService {
     );
 
     if (!missingCategories.length) {
-      this.appService.selectedDateRecord.set(chosenDateRecords);
+      this.appService.selectedDateRecords.set(chosenDateRecords);
       return;
     }
     const missingRecords: CategoryRecord[] = missingCategories.map((cat: Category) => ({
@@ -56,7 +56,7 @@ export class DBService {
       .equals(date)
       .toArray();
 
-    this.appService.selectedDateRecord.set(updatedResult);
+    this.appService.selectedDateRecords.set(updatedResult);
   }
 
   async getCategories() {
