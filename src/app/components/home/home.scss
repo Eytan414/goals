@@ -11,20 +11,19 @@ main {
     justify-self: center;
 
     .categories {
-        max-width: min(100%, 777px);
-        background-color: lightgreen;
         display: grid;
-        gap: .25rem;
+        grid-template-columns: 1fr 1fr;
+        gap: 0.5rem 1rem;
         padding: .5rem;
         border: .125rem solid green;
+        max-width: min(100%, 777px);
+        background-color: lightgreen;
         text-align: center;
 
-        hr {
-            width: 100%;
-            height: 2px;
-            background: white;
-            border-radius: .5rem;
-            border-style: hidden;
+        .record {
+            display: flex;
+            gap: .75rem;
+            justify-content: space-between;
         }
     }
 
