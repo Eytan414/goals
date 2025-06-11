@@ -6,7 +6,7 @@ button {
     padding: 0;
     background: transparent;
     border: 0;
-
+    cursor: pointer;
     &.decrement {
         color: darkred;
     }

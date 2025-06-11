@@ -35,5 +35,14 @@ export class Home implements OnInit {
     this.appService.selectedDate.set(date);
   }
 
-
+  weightedScore(): string {
+    const records = this.appService.selectedDateRecords();
+    const categories = this.appService.categories();
+    let total = 0;
+    records.forEach(r => {
+      const catagory = categories.find(c => c.id === r.categoryId);
+      total += (r.value * catagory!.weight)
+    })
+    return String(total);
+  }
 }
