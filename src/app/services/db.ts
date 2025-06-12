@@ -6,13 +6,17 @@ import { AppService } from './app-service';
 export class DBService {
   private readonly appService = inject(AppService);
 
-  // async addNewCategory(category: Category) {
-  //   await db.categories.add(category);
-  // }
+
+  // TODO: add delete category (and all records that ref'd it)
+
+  async addNewCategory(category: Category) {
+    await db.categories.add(category);
+    this.fetchCategories();
+  }
 
   async updateCategory(newCategory: Category) {
     await db.categories.put(newCategory);
-    this.reloadRecords(this.appService.selectedDate());
+    this.fetchCategories();
   }
   async updateRecord(newRecord: CategoryRecord) {
     await db.records.put(newRecord);
@@ -20,14 +24,13 @@ export class DBService {
   }
 
   async reloadRecords(date: string) {
-    const chosenDateRecords = await db.records
+    const recordsForDate = await db.records
       .where("date")
       .equals(date)
       .toArray();
-
-    this.fetchCategories();
+    this.appService.selectedDateRecords.set(recordsForDate);
   }
-  
+
   async fetchRecordsByDate(date: string) {
     let categories = this.appService.categories();
     const chosenDateRecords = await db.records

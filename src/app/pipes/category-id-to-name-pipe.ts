@@ -3,7 +3,7 @@ import { AppService } from '../services/app-service';
 
 @Pipe({
   name: 'categoryIdToName',
-  pure: true,
+  pure: false,
   standalone: true
 })
 export class CategoryIdToNamePipe implements PipeTransform {
