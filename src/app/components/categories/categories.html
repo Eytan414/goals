@@ -1,0 +1,19 @@
+<main>
+    @let records = appService.selectedDateRecords();
+    @for(r of records; track r.id){
+    <!-- 
+            hack to trigger CD to avoid:
+            looping over selectedDateRecords() && categories() signals 
+            like in computed/etc which are heavier 
+        -->
+    @let _cats = appService.categories();
+    <div class="record">
+        <decrement-btn [record]="r" />
+        {{r.categoryId | categoryIdToName}}
+        :
+        {{r.value}}
+        <increment-btn [record]="r" />
+    </div>
+    }
+    <weighted-score />
+</main>

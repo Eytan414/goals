@@ -21,6 +21,13 @@ input {
     }
 }
 
+input[type="date"]::-webkit-calendar-picker-indicator {
+    filter: brightness(0) saturate(100%)
+        invert(91%) sepia(4%)
+        saturate(1151%) hue-rotate(200deg)
+        brightness(101%) contrast(95%);
+}
+
 input[type="number"]::-webkit-outer-spin-button,
 input[type="number"]::-webkit-inner-spin-button {
     -webkit-appearance: none;

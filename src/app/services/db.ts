@@ -39,7 +39,7 @@ export class DBService {
       .toArray();
 
     const missingCategories: Category[] = categories.filter(
-      catagory => !chosenDateRecords.some(record => record.categoryId === catagory.id)
+      category => !chosenDateRecords.some(record => record.categoryId === category.id)
     );
 
     if (!missingCategories.length) {
