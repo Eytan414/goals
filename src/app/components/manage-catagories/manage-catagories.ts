@@ -23,13 +23,14 @@ export class ManageCatagories {
   newCategoryName = signal<string>('');
   newCategoryWeight = signal<number>(NaN);
 
-  
+
   isFormDisabled(form: NgForm, i: number) {
-    //TODO: needs testing and refinement (consider allow only 1 form-submit at same time)
+    //TODO: needs testing and refinement (consider allow only 1 form-submit btn enabled at same time)
     return !this.editCategoryWeights()[i]
       && !this.editCategoryNames()[i];
   }
 
+  //TODO: check if addNewCategoryForm needed
   addNewCategory(addNewCategoryForm: NgForm) {
     const newCategory: Category = {
       name: this.newCategoryName(),
@@ -38,7 +39,13 @@ export class ManageCatagories {
     this.db.addNewCategory(newCategory);
   }
 
+  deleteCategory(id: number) {
+    const categoryToDelete: Category = this.appService.categories()
+      .find(c => c.id === id)!;
     
+    this.db.deleteCategory(categoryToDelete.id!);
+  }
+
   updateCategory(form: NgForm, id: number, i: number) {
     const currentCategory: Category = this.appService.categories()
       .find(c => c.id === id)!;

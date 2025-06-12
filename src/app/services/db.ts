@@ -1,13 +1,19 @@
 import { inject, Injectable } from '@angular/core';
 import Dexie, { Table } from 'dexie';
 import { AppService } from './app-service';
+import { from, switchMap, mergeMap } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class DBService {
   private readonly appService = inject(AppService);
 
 
-  // TODO: add delete category (and all records that ref'd it)
+  async deleteCategory(id: number) {
+    await db.categories.where({ id }).delete();
+    await db.records.where('categoryId').equals(id).delete();
+    this.fetchCategories();
+    this.reloadRecords();
+  }
 
   async addNewCategory(category: Category) {
     await db.categories.add(category);
@@ -20,10 +26,11 @@ export class DBService {
   }
   async updateRecord(newRecord: CategoryRecord) {
     await db.records.put(newRecord);
-    this.reloadRecords(this.appService.selectedDate());
+    this.reloadRecords();
   }
 
-  async reloadRecords(date: string) {
+  async reloadRecords() {
+    const date = this.appService.selectedDate();
     const recordsForDate = await db.records
       .where("date")
       .equals(date)
