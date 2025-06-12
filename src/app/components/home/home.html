@@ -1,4 +1,5 @@
 <main>
+    <!-- TODO: divide most sections to component -->
     <section class="date-selection">
         <h1>לפי תאריך:</h1>
         <div class="date-interaction">
@@ -36,6 +37,7 @@
             <summary>
                 <h1>ניהול קטגוריות:</h1>
             </summary>
+            <!-- TODO: add new category -->
             <form #manageCategoriesForm="ngForm">
                 @for(c of appService.categories(); track $index){
                 <div class="category-wrapper">
