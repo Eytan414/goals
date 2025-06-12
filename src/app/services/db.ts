@@ -10,6 +10,10 @@ export class DBService {
   //   await db.categories.add(category);
   // }
 
+  async updateCategory(newCategory: Category) {
+    await db.categories.put(newCategory);
+    this.reloadRecords(this.appService.selectedDate());
+  }
   async updateRecord(newRecord: CategoryRecord) {
     await db.records.put(newRecord);
     this.reloadRecords(this.appService.selectedDate());
@@ -21,9 +25,9 @@ export class DBService {
       .equals(date)
       .toArray();
 
-    this.appService.selectedDateRecords.set(chosenDateRecords);
+    this.fetchCategories();
   }
-
+  
   async fetchRecordsByDate(date: string) {
     let categories = this.appService.categories();
     const chosenDateRecords = await db.records
@@ -54,7 +58,7 @@ export class DBService {
     this.appService.selectedDateRecords.set(updatedResult);
   }
 
-  async getCategories() {
+  async fetchCategories() {
     const categories = await db.categories.toArray();
     this.appService.categories.set(categories);
     return categories;
