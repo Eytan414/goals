@@ -22,7 +22,7 @@
     </section>
 
     @let score = weightedScore();
-    <section [class]="{'bad': score < 0, 'good': score >= 15 }" class="summary">
+    <section [class]="{'bad': score < 0, 'good': score > 15 }" class="summary">
         weighted score:
         <span> {{ score }}</span>
     </section>
