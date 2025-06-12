@@ -7,6 +7,7 @@ import { DecrementBtn } from '../decrement-btn/decrement-btn';
 import { IncrementBtn } from '../increment-btn/increment-btn';
 import { ChangeDate } from '../change-date/change-date';
 import { ManageCatagories } from '../manage-catagories/manage-catagories';
+import { Countdown } from '../countdown/countdown';
 
 @Component({
   selector: 'app-home',
@@ -17,9 +18,11 @@ import { ManageCatagories } from '../manage-catagories/manage-catagories';
     DecrementBtn,
     ManageCatagories,
     ChangeDate,
+    Countdown,
   ],
   templateUrl: './home.html',
   styleUrl: './home.scss',
+  standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Home implements OnInit {

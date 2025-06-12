@@ -1,4 +1,4 @@
-import { Component, inject, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
 import { Category, DBService } from '../../services/db';
 import { AppService } from '../../services/app-service';
@@ -10,7 +10,9 @@ import { AppService } from '../../services/app-service';
 
   ],
   templateUrl: './manage-catagories.html',
-  styleUrl: './manage-catagories.scss'
+  styleUrl: './manage-catagories.scss',
+  standalone: true,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ManageCatagories {
   private readonly db = inject(DBService);
