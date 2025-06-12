@@ -16,7 +16,7 @@ main {
         display: grid;
         align-items: center;
         align-self: start;
-        grid-template-columns: 1fr 1fr;
+        grid-template-columns: 1fr 2fr;
         width: 100%;
 
         >* {

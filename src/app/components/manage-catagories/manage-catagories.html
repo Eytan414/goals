@@ -1,4 +1,5 @@
-<!-- TODO: add new category -->
+<!-- TODO: split to components per form,
+    consider single component with input, used twice -->
 <form #manageCategoriesForm="ngForm">
     @for(c of appService.categories(); track $index){
     <div class="category-wrapper">
