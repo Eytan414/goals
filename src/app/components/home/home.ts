@@ -1,11 +1,12 @@
-import { ChangeDetectionStrategy, Component, effect, inject, OnInit, signal } from '@angular/core';
-import { NgForm, FormsModule } from '@angular/forms';
+import { ChangeDetectionStrategy, Component, effect, inject, OnInit } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { AppService } from '../../services/app-service';
-import { DBService, CategoryRecord, Category } from '../../services/db';
+import { DBService} from '../../services/db';
 import { CategoryIdToNamePipe } from '../../pipes/category-id-to-name-pipe';
 import { DecrementBtn } from '../decrement-btn/decrement-btn';
 import { IncrementBtn } from '../increment-btn/increment-btn';
 import { ChangeDate } from '../change-date/change-date';
+import { ManageCatagories } from '../manage-catagories/manage-catagories';
 
 @Component({
   selector: 'app-home',
@@ -14,6 +15,7 @@ import { ChangeDate } from '../change-date/change-date';
     CategoryIdToNamePipe,
     IncrementBtn,
     DecrementBtn,
+    ManageCatagories,
     ChangeDate,
   ],
   templateUrl: './home.html',
@@ -27,10 +29,6 @@ export class Home implements OnInit {
     const date = this.appService.selectedDate();
     return await this.db.fetchRecordsByDate(date);
   });
-  editCategoryNames = signal<string[]>([]);
-  editCategoryWeights = signal<number[]>([]);
-  newCategoryName = signal<string>('');
-  newCategoryWeight = signal<number>(NaN);
 
 
   async ngOnInit() {
@@ -52,29 +50,6 @@ export class Home implements OnInit {
     })
     return total;
   }
-  updateCategory(form: NgForm, id: number, i: number) {
-    const currentCategory: Category = this.appService.categories()
-      .find(c => c.id === id)!;
-    const newCategory = {
-      ...currentCategory,
-      name: this.editCategoryNames()[i] ?? currentCategory.name,
-      weight: this.editCategoryWeights()[i] ?? currentCategory.weight,
-    }
-    this.db.updateCategory(newCategory);
-    form.reset();
-  }
 
-  isFormDisabled(form: NgForm, i: number) {
-    //TODO: needs testing and refinement (consider allow only 1 form-submit at same time)
-    return !this.editCategoryWeights()[i]
-      && !this.editCategoryNames()[i];
-  }
 
-  addNewCategory(addNewCategoryForm: NgForm) {
-    const newCategory: Category = {
-      name: this.newCategoryName(),
-      weight: this.newCategoryWeight()
-    };
-    this.db.addNewCategory(newCategory);
-  }
 }
