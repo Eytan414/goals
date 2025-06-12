@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, inject, input } from '@angular/core';
-import { CategoryRecord, DBService } from '../../services/db';
+import { CategoryRecord, DBService } from '../../../services/db';
 
 @Component({
   selector: 'increment-btn',

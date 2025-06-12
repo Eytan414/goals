@@ -3,9 +3,9 @@ import { FormsModule } from '@angular/forms';
 import { AppService } from '../../services/app-service';
 import { DBService } from '../../services/db';
 import { Categories } from '../categories/categories';
-import { ChangeDate } from '../change-date/change-date';
+import { ChangeDate } from './change-date/change-date';
 import { ManageCatagories } from '../manage-catagories/manage-catagories';
-import { Countdown } from '../countdown/countdown';
+import { Countdown } from './countdown/countdown';
 
 @Component({
   selector: 'app-home',
@@ -24,7 +24,7 @@ import { Countdown } from '../countdown/countdown';
 export class Home implements OnInit {
   private readonly db = inject(DBService);
   readonly appService = inject(AppService);
-  
+
   dateChangeEffect = effect(async () => {
     const date = this.appService.selectedDate();
     return await this.db.fetchRecordsByDate(date);

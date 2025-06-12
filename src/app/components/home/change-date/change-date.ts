@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, inject, input } from '@angular/core';
-import { AppService } from '../../services/app-service';
+import { AppService } from '../../../services/app-service';
 
 @Component({
   selector: 'change-date',
@@ -20,7 +20,7 @@ export class ChangeDate {
 
     const newDate = new Date(date);
     newDate.setDate(date.getDate() + delta);
-    
+
     this.appService.selectedDate.set(newDate.toISOString().split('T')[0]);
   }
 }

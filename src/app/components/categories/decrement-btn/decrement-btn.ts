@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, inject, input } from '@angular/core';
-import { DBService, CategoryRecord } from '../../services/db';
+import { DBService, CategoryRecord } from '../../../services/db';
 
 @Component({
   selector: 'decrement-btn',
