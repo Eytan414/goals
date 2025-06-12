@@ -1,40 +1,42 @@
 <main>
-    <section class="date-selection">
-        <h1>לפי תאריך:</h1>
-        <div class="date-interaction">
-            <change-date direction="back" />
-            <input type="date" name="date" [(ngModel)]="appService.selectedDate" (ngModelChange)="onDateChange($event)"
-                [max]="appService.today" />
-            <change-date direction="forward" />
-        </div>
-        <countdown />
-    </section>
+    <section class="categories-container">
+        <section class="date-selection">
+            <h1>לפי תאריך:</h1>
+            <div class="date-interaction">
+                <change-date direction="back" />
+                <input type="date" name="date" [(ngModel)]="appService.selectedDate"
+                    (ngModelChange)="onDateChange($event)" [max]="appService.today" />
+                <change-date direction="forward" />
+            </div>
+            <countdown />
+        </section>
 
-    <section class="categories">
-        @let records = appService.selectedDateRecords();
-        @for(r of records; track r.id){
-        <!-- 
+        <section class="categories">
+            @let records = appService.selectedDateRecords();
+            @for(r of records; track r.id){
+            <!-- 
             hack to trigger CD to avoid:
             looping over selectedDateRecords() && catagories() signals 
             like in computed/etc which are heavier 
         -->
-        @let _cats = appService.categories();
-        <div class="record">
-            <decrement-btn [record]="r" />
-            {{r.categoryId | categoryIdToName}}
-            :
-            {{r.value}}
-            <increment-btn [record]="r" />
-        </div>
-        }
+            @let _cats = appService.categories();
+            <div class="record">
+                <decrement-btn [record]="r" />
+                {{r.categoryId | categoryIdToName}}
+                :
+                {{r.value}}
+                <increment-btn [record]="r" />
+            </div>
+            }
 
-        @let score = weightedScore();
-        <section [class]="{'bad': score < 0, 'good': score > 15 }" class="summary">
-            משוקלל ליום:
-            <span> {{ score }}</span>
+            @let score = weightedScore();
+            <section [class]="{'bad': score < 0, 'good': score > 15 }" class="summary">
+                משוקלל ליום:
+                <span> {{ score }}</span>
+            </section>
         </section>
-    </section>
 
+    </section>
 
     <section class="manage">
         <details open>

@@ -26,16 +26,6 @@ main {
         .date-interaction {
             display: flex;
             justify-content: space-evenly;
-
-            input {
-                justify-self: center;
-                padding: .5rem;
-                cursor: pointer;
-                color: white;
-                background: indigo;
-                border: 0;
-                border-radius: .375rem;
-            }
         }
     }
 

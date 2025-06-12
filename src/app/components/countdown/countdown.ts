@@ -26,9 +26,7 @@ export class Countdown {
       const minutes = Math.floor((msLeft % ONE_HOUR) / ONE_MINUTE);
       const seconds = Math.floor((msLeft % ONE_MINUTE) / ONE_SECOND);
 
-      return `${hours.toString().padStart(2, '0')}:${minutes
-        .toString()
-        .padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+      return `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
     })
   );
 }

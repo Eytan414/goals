@@ -8,6 +8,19 @@ body {
     margin: 0;
 }
 
+input {
+    background-color: #1E2235;
+    color: #D0D7FF;
+    font-size: 1rem;
+    padding: .25rem;
+    border: none;
+    border-radius: .375rem;
+
+    &::placeholder {
+        color: #5A63B8;
+    }
+}
+
 input[type="number"]::-webkit-outer-spin-button,
 input[type="number"]::-webkit-inner-spin-button {
     -webkit-appearance: none;
