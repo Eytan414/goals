@@ -20,6 +20,7 @@ import { Countdown } from './countdown/countdown';
   styleUrl: './home.scss',
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
+  
 })
 export class Home implements OnInit {
   private readonly db = inject(DBService);
