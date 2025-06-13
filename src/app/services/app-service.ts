@@ -10,6 +10,14 @@ export class AppService {
   categories = signal<Category[]>([]);
   selectedDate = signal<string>(this.today);
   selectedDateRecords = signal<CategoryRecord[]>([]);
+  activeRecords = computed(() => {
+    const categories = this.categories().map(c => ({ id: c.id, weight: c.weight }));
+    return this.selectedDateRecords().toSorted((a, b) => {
+      const aWeight:number = categories.find(c => c.id === a.categoryId)?.weight!;
+      const bWeight:number = categories.find(c => c.id === b.categoryId)?.weight!;
+      return Math.abs(aWeight) - Math.abs(bWeight);
+    })
+  })
   categoryWeights = computed<MinMaxWeights>(() => {
     const categories = this.categories();
     const weights = categories.map(c => c.weight);
@@ -25,7 +33,7 @@ export class AppService {
   }
 }
 
-type MinMaxWeights = { 
+type MinMaxWeights = {
   minWeight: number,
   maxWeight: number,
 }

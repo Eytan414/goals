@@ -1,5 +1,5 @@
 <main>
-    @let records = appService.selectedDateRecords();
+    @let records = appService.activeRecords();
     @for(r of records; track r.id){
     <!-- 
             hack to trigger CD to avoid:
