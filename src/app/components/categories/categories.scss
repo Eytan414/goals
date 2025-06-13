@@ -5,14 +5,26 @@ main {
     padding: .5rem;
     border: .125rem solid darkblue;
     border-radius: .5rem;
-    background-color: royalblue;
+    background-color: cornflowerblue;
     text-align: center;
 
     .record {
         display: flex;
         gap: .75rem;
         justify-content: space-between;
+        align-items: center;
         color: darkblue;
+        font-weight: bold;
+
+        &.heavy{
+            font-size: 1.5rem;
+        }
+        &.medium{
+            font-size: 1rem;
+        }
+        &.negative{
+            color:red;
+        }
     }
 
     span {

@@ -7,7 +7,8 @@
             like in computed/etc which are heavier 
         -->
     @let _cats = appService.categories();
-    <div class="record">
+    <div class="record" [class]="getWeightClass(r.categoryId)" 
+        [style.fontSize.rem]="getFactor(r.categoryId)">
         <decrement-btn [record]="r" />
         {{r.categoryId | categoryIdToName}}
         :

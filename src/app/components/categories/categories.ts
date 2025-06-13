@@ -20,4 +20,34 @@ import { WeightedScore } from './weighted-score/weighted-score';
 })
 export class Categories {
   readonly appService = inject(AppService);
+
+
+  getFactor(categoryId: number) {
+    const { weight } = this.appService.categories().find(c => c.id === categoryId)!;
+    let classList: string = '';
+    if (weight < 0) classList += 'negative ';
+
+    const normalized = this.calculateNormalizedWeight(weight);
+    return normalized + .8;
+  }
+  getWeightClass(categoryId: number) {
+    const { weight } = this.appService.categories().find(c => c.id === categoryId)!;
+    let classList: string = '';
+    if (weight < 0) classList += 'negative ';
+
+    const normalized = this.calculateNormalizedWeight(weight);
+
+    classList += normalized > .66 ? 'heavy '
+      : normalized > .33 ? 'medium '
+        : 'light ';
+
+    return classList;
+  }
+
+  private calculateNormalizedWeight(weight: number): number {
+    const absoluteWeight = Math.abs(weight);
+    const { minWeight, maxWeight } = this.appService.categoryWeights();
+    const range = Math.max(Math.abs(minWeight), Math.abs(maxWeight));
+    return absoluteWeight / range;
+  }
 }
