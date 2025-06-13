@@ -23,25 +23,15 @@ export class Categories {
 
 
   getFactor(categoryId: number) {
+    const baseFontSizeRem = .8;
     const { weight } = this.appService.categories().find(c => c.id === categoryId)!;
-    let classList: string = '';
-    if (weight < 0) classList += 'negative ';
-
     const normalized = this.calculateNormalizedWeight(weight);
-    return normalized + .8;
+    return normalized + baseFontSizeRem;
   }
-  getWeightClass(categoryId: number) {
+
+  colorNegatives(categoryId: number) {
     const { weight } = this.appService.categories().find(c => c.id === categoryId)!;
-    let classList: string = '';
-    if (weight < 0) classList += 'negative ';
-
-    const normalized = this.calculateNormalizedWeight(weight);
-
-    classList += normalized > .66 ? 'heavy '
-      : normalized > .33 ? 'medium '
-        : 'light ';
-
-    return classList;
+    return weight < 0 ? 'negative ' : '';
   }
 
   private calculateNormalizedWeight(weight: number): number {
