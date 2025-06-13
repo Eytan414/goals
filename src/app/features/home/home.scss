@@ -8,16 +8,32 @@ main {
     width: 100%;
     color: aquamarine;
 
+    @media(width < 777px) {
+        grid-template-columns: 1fr;
+    }
+
     &>section {
         height: calc(100vh - 2rem);
         max-height: 100%;
         overflow: auto;
         padding: 0 1rem;
+
+        @media(width < 777px) {
+            height: auto;
+            max-height: unset;
+            overflow: hidden;
+            padding: 0;
+        }
+
     }
 
     section.categories-container {
         display: grid;
         gap: 1rem;
+
+        @media(width < 777px) {
+            height: auto;
+        }
     }
 
     section.manage {
@@ -25,12 +41,7 @@ main {
         padding: 1rem 0;
 
         details {
-            transition: all 1s;
-            height: 100px;
-            &[open]{
-                transition: all 1s;
-                height: 100%;
-            }
+
             summary {
                 cursor: pointer;
                 outline: 0;

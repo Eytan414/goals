@@ -8,6 +8,10 @@ main {
     background-color: cornflowerblue;
     text-align: center;
 
+    @media(width < 777px) {
+        gap: 1rem;
+    }
+
     .record {
         display: flex;
         gap: .75rem;

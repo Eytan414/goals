@@ -4,6 +4,10 @@
             gap: 0.25rem 1rem;
             padding: 1rem 0 0 1rem;
 
+            @media(width < 777px) {
+                grid-template-columns: repeat(2, auto);
+            }
+
             &.add-new-category {
                 grid-template-columns: 1fr 1fr;
 
@@ -68,7 +72,7 @@
                 border: 1px solid transparent;
                 border-radius: .25rem;
 
-                &:has(.delete:hover){
+                &:has(.delete:hover) {
                     border-color: darkred !important;
                     background-color: #8b000055;
                 }
