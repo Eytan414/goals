@@ -1,0 +1,10 @@
+<main>
+    <h1>לפי תאריך:</h1>
+    <div class="date-interaction">
+        <change-date direction="back" />
+        <input type="date" name="date" [(ngModel)]="appService.selectedDate" (ngModelChange)="onDateChange($event)"
+            [max]="appService.today" />
+        <change-date direction="forward" />
+    </div>
+    <countdown />
+</main>

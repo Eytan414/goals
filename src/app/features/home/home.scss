@@ -18,31 +18,7 @@ main {
     section.categories-container {
         display: grid;
         gap: 1rem;
-
-        .date-selection {
-            display: grid;
-            align-items: center;
-            grid-template-columns: 1fr 2fr;
-            width: 100%;
-
-            h1 {
-                margin-block: .5rem;
-            }
-
-            .date-interaction {
-                display: flex;
-                justify-content: space-evenly;
-
-                text-align: center !important;
-
-                input {
-                    text-align: center !important;
-                }
-            }
-        }
     }
-
-
 
     section.manage {
         width: 100%;

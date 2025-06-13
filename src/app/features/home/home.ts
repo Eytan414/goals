@@ -3,9 +3,8 @@ import { FormsModule } from '@angular/forms';
 import { AppService } from '../../services/app-service';
 import { DBService } from '../../services/db';
 import { Categories } from '../categories/categories';
-import { ChangeDate } from './change-date/change-date';
 import { ManageCatagories } from '../manage-catagories/manage-catagories';
-import { Countdown } from './countdown/countdown';
+import { DateSelection } from './date-selection/date-selection';
 
 @Component({
   selector: 'app-home',
@@ -13,8 +12,7 @@ import { Countdown } from './countdown/countdown';
     FormsModule,
     Categories,
     ManageCatagories,
-    ChangeDate,
-    Countdown,
+    DateSelection,
   ],
   templateUrl: './home.html',
   styleUrl: './home.scss',
@@ -35,8 +33,4 @@ export class Home implements OnInit {
     await this.db.fetchCategories();
   }
 
-  onDateChange(selectedDate: Event) {
-    const date = new Date(String(selectedDate)).toISOString().split('T')[0];
-    this.appService.selectedDate.set(date);
-  }
 }
