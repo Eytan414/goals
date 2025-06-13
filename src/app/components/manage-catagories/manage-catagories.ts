@@ -29,14 +29,14 @@ export class ManageCatagories {
     return !this.editCategoryWeights()[i]
       && !this.editCategoryNames()[i];
   }
-
-  //TODO: check if addNewCategoryForm needed
+  
   addNewCategory(addNewCategoryForm: NgForm) {
     const newCategory: Category = {
       name: this.newCategoryName(),
       weight: this.newCategoryWeight()
     };
     this.db.addNewCategory(newCategory);
+    addNewCategoryForm.reset();
   }
 
   deleteCategory(id: number) {

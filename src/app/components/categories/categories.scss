@@ -15,9 +15,12 @@ main {
         align-items: center;
         color: darkblue;
         font-weight: bold;
+        border: 1px solid;
+        border-radius: .5rem;
+        padding: .25rem;
 
-        &.negative{
-            color:red;
+        &.negative {
+            color: red;
         }
     }
 

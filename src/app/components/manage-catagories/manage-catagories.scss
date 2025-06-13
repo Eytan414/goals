@@ -22,6 +22,7 @@
                 display: flex;
                 gap: 1rem;
                 justify-content: space-between;
+
                 button {
                     justify-self: center;
                     display: grid;
@@ -52,7 +53,7 @@
                         cursor: not-allowed;
                     }
 
-                    &:hover:not([disabled]) {
+                    &:hover:not([disabled], .delete) {
                         color: white;
                         background-color: green;
 
@@ -63,6 +64,14 @@
             .category-wrapper {
                 display: grid;
                 gap: .25rem;
+                padding: .25rem;
+                border: 1px solid transparent;
+                border-radius: .25rem;
+
+                &:has(.delete:hover){
+                    border-color: darkred !important;
+                    background-color: #8b000055;
+                }
 
                 hr {
                     width: 100%;
