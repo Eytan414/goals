@@ -1,0 +1,9 @@
+main{
+            display: grid;
+        gap: 1rem;
+
+        label {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+        }
+}

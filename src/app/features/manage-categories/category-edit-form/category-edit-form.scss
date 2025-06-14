@@ -1,0 +1,49 @@
+main {
+
+    label {
+        display: grid;
+        grid-template-columns: 1fr 10ch;
+        gap: 1rem;
+        padding: .25rem 0;
+    }
+
+    .action-buttons {
+        display: flex;
+        gap: 1rem;
+        justify-content: space-between;
+
+        button {
+            justify-self: center;
+            display: grid;
+            place-content: center;
+            padding: .25rem .75rem;
+            border: 0;
+            border-radius: .175rem;
+            cursor: pointer;
+
+            &.delete {
+                height: 1.5rem;
+                width: 1.5rem;
+                color: orangered;
+                background-color: darkred;
+                border-radius: 50%;
+                padding: 1rem;
+
+                svg {
+                    height: inherit;
+                    width: inherit;
+                    stroke: black;
+                }
+            }
+
+            &[disabled] {
+                cursor: not-allowed;
+            }
+
+            &:hover:not([disabled], .delete) {
+                color: white;
+                background-color: green;
+            }
+        }
+    }
+}

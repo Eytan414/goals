@@ -26,7 +26,6 @@ export class CategoryAddForm {
       weight: this.newCategoryWeight()
     };
     this.db.addNewCategory(newCategory);
-    //TODO: check why form not reset
     addNewCategoryForm.reset();
   }
 
