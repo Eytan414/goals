@@ -1,0 +1,15 @@
+<main>
+    <div class="fields-wrapper">
+        <label>
+            שם:
+            <input type="text" name="category-name" required [(ngModel)]="newCategoryName" placeholder="שם קטגוריה">
+        </label>
+        <label>
+            משקל:
+            <input type="number" name="weight" required [(ngModel)]="newCategoryWeight" placeholder="משקל">
+        </label>
+    </div>
+    <button (click)="addNewCategory(addNewCategoryForm())" [disabled]="addNewCategoryForm().invalid" type="submit">
+        הוספת קטגוריה
+    </button>
+</main>

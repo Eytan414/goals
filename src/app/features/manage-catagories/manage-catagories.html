@@ -32,18 +32,6 @@
     </div>
     }
 </form>
-<form #addNewCategoryForm="ngForm" (ngSubmit)="addNewCategory(addNewCategoryForm)" class="add-new-category">
-    <div class="fields-wrapper">
-        <label>
-            שם:
-            <input type="text" name="category-name" required [(ngModel)]="newCategoryName" placeholder="שם קטגוריה">
-        </label>
-        <label>
-            משקל:
-            <input type="number" name="weight" required [(ngModel)]="newCategoryWeight" placeholder="משקל">
-        </label>
-    </div>
-    <button [disabled]="addNewCategoryForm.invalid" type="submit">
-        הוספת קטגוריה
-    </button>
+<form #addNewCategoryForm="ngForm" class="add-new-category">
+    <category-add-form [addNewCategoryForm]="addNewCategoryForm" />
 </form>

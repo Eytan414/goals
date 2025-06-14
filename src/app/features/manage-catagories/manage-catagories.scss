@@ -10,16 +10,6 @@
 
             &.add-new-category {
                 grid-template-columns: 1fr 1fr;
-
-                .fields-wrapper {
-                    display: grid;
-                    gap: .5rem;
-
-                    label {
-                        display: grid;
-                        grid-template-columns: 1fr 1fr;
-                    }
-                }
             }
 
             .action-buttons {
