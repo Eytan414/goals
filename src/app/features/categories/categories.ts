@@ -6,7 +6,7 @@ import { AppService } from '../../services/app-service';
 import { WeightedScore } from './weighted-score/weighted-score';
 
 @Component({
-  selector: 'catagories',
+  selector: 'categories',
   imports: [
     CategoryIdToNamePipe,
     IncrementBtn,

@@ -3,7 +3,7 @@ import { FormsModule } from '@angular/forms';
 import { AppService } from '../../services/app-service';
 import { DBService } from '../../services/db';
 import { Categories } from '../categories/categories';
-import { ManageCatagories } from '../manage-catagories/manage-catagories';
+import { ManageCategories } from '../manage-categories/manage-categories';
 import { DateSelection } from './date-selection/date-selection';
 
 @Component({
@@ -11,14 +11,14 @@ import { DateSelection } from './date-selection/date-selection';
   imports: [
     FormsModule,
     Categories,
-    ManageCatagories,
+    ManageCategories,
     DateSelection,
   ],
   templateUrl: './home.html',
   styleUrl: './home.scss',
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  
+
 })
 export class Home implements OnInit {
   private readonly db = inject(DBService);
