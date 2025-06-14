@@ -2,11 +2,13 @@ import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/cor
 import { FormsModule, NgForm } from '@angular/forms';
 import { Category, DBService } from '../../services/db';
 import { AppService } from '../../services/app-service';
+import { CategoryAddForm } from './category-add-form/category-add-form';
 
 @Component({
   selector: 'manage-catagories',
   imports: [
     FormsModule,
+    CategoryAddForm,
 
   ],
   templateUrl: './manage-catagories.html',
@@ -20,9 +22,6 @@ export class ManageCatagories {
 
   editCategoryNames = signal<string[]>([]);
   editCategoryWeights = signal<number[]>([]);
-  newCategoryName = signal<string>('');
-  newCategoryWeight = signal<number>(NaN);
-
 
   isFormDisabled(form: NgForm, i: number) {
     //TODO: needs testing and refinement (consider allow only 1 form-submit btn enabled at same time)
@@ -30,14 +29,6 @@ export class ManageCatagories {
       && !this.editCategoryNames()[i];
   }
   
-  addNewCategory(addNewCategoryForm: NgForm) {
-    const newCategory: Category = {
-      name: this.newCategoryName(),
-      weight: this.newCategoryWeight()
-    };
-    this.db.addNewCategory(newCategory);
-    addNewCategoryForm.reset();
-  }
 
   deleteCategory(id: number) {
     const categoryToDelete: Category = this.appService.categories()
