@@ -16,15 +16,14 @@ export class AppService {
   });
 
   selectedDate = signal<string>(this.today);
-  dayOfWeek = computed<number>(() => new Date(this.selectedDate()).getDay());
+  dayOfWeek = computed<Date>(() => new Date(this.selectedDate()));
 
   selectedDateRecords = signal<CategoryRecord[]>([]);
-  sortedDateRecords = computed<CategoryRecord[]>(() => this.selectedDateRecords().toSorted(this.compareFn));
+  sortedDateRecords = computed<CategoryRecord[]>(
+    () => this.selectedDateRecords().sort(this.compareFn));
 
-
-  private compareFn(a: CategoryRecord, b: CategoryRecord): number {
+  private compareFn = (a: CategoryRecord, b: CategoryRecord): number => {
     const categories = this.categories().map(c => ({ id: c.id, weight: c.weight }));
-
     const aWeight: number = categories.find(c => c.id === a.categoryId)?.weight!;
     const bWeight: number = categories.find(c => c.id === b.categoryId)?.weight!;
     return Math.abs(aWeight) - Math.abs(bWeight);
