@@ -1,5 +1,22 @@
 main {
+    display: flex;
+    gap: 1rem;
+
     input {
         text-align: center;
+    }
+
+    span {
+        width: 1.5rem;
+        align-self: end;
+        cursor: pointer;
+        visibility: hidden;
+        &:hover{
+            filter: invert(1);
+        }
+
+        &.visible{
+            visibility: visible;
+        }
     }
 }
