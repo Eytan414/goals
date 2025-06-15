@@ -24,12 +24,10 @@ main {
             overflow: hidden;
             padding: 0;
         }
-
     }
 
     section.categories-container {
         display: grid;
-        gap: 1rem;
 
         @media(width < 777px) {
             height: auto;
@@ -40,15 +38,12 @@ main {
         width: 100%;
         padding: 1rem 0;
 
-        details {
+        summary {
+            cursor: pointer;
+            outline: 0;
 
-            summary {
-                cursor: pointer;
-                outline: 0;
-
-                h1 {
-                    display: inline;
-                }
+            h1 {
+                display: inline;
             }
         }
     }

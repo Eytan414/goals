@@ -17,5 +17,4 @@ export class CategoryFormControls {
   categoryWeight = input.required<number>();
   namePlaceholder = input.required<string>();
   weightPlaceholder = input.required<number | string>();
-
 }

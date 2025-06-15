@@ -11,7 +11,11 @@ main {
         .datepicker {
             display: grid;
             grid-template-columns: 1fr;
-            font-weight: bold;            
+            font-weight: bold;
+            
+            span{
+                justify-self: start;
+            }
         }
     }
 }
