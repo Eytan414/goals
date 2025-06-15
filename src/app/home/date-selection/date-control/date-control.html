@@ -1,0 +1,7 @@
+<main>
+    <input type="date" name="date" [(ngModel)]="appService.selectedDate" (ngModelChange)="onDateChange($event)"
+        [max]="appService.today" />
+    @if(!isTodaySelected()){
+    <div (click)="jumpToToday()">today</div>
+    }
+</main>

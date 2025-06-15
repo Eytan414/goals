@@ -2,9 +2,7 @@
     <div class="date-interaction">
         <change-date direction="back" />
         <div class="datepicker">
-            <input type="date" name="date" [(ngModel)]="appService.selectedDate" (ngModelChange)="onDateChange($event)"
-                [max]="appService.today" />
-            <!-- <div>jump to today</div> -->
+            <date-control />
             <span>{{appService.dayOfWeek() | date:'EEEE'}}</span>
         </div>
         <change-date direction="forward" />
