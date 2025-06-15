@@ -6,7 +6,7 @@
             looping over selectedDateRecords() && categories() signals 
             like in computed/etc which are heavier 
         -->
-    @let _cats = appService.categories();
+    @let _categories = appService.categories();
     <div class="record" [class]="colorNegatives(r.categoryId)" 
         [style.fontSize.rem]="getFactor(r.categoryId)">
         <decrement-btn [record]="r" />
