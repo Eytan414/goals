@@ -11,7 +11,6 @@ import { interval, map } from 'rxjs';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class Countdown {
-
   readonly countdown$ = interval(ONE_SECOND).pipe(
     map(() => {
       const now = new Date();

@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, inject, input } from '@angular/core';
-import { AppService } from '../../../../services/app-service';
+import { AppService } from '../../../services/app-service';
 
 @Component({
   selector: 'change-date',

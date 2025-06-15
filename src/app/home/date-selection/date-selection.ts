@@ -1,5 +1,5 @@
-import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
-import { AppService } from '../../../services/app-service';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { AppService } from '../../services/app-service';
 import { Countdown } from './countdown/countdown';
 import { ChangeDate } from './change-date/change-date';
 import { FormsModule } from '@angular/forms';

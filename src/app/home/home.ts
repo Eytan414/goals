@@ -1,9 +1,9 @@
 import { ChangeDetectionStrategy, Component, effect, inject, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { AppService } from '../../services/app-service';
-import { DBService } from '../../services/db';
-import { Categories } from '../categories/categories';
-import { ManageCategories } from '../manage-categories/manage-categories';
+import { AppService } from '../services/app-service';
+import { DBService } from '../services/db';
+import { Categories } from './categories/categories';
+import { ManageCategories } from './manage-categories/manage-categories';
 import { DateSelection } from './date-selection/date-selection';
 
 @Component({
@@ -32,5 +32,4 @@ export class Home implements OnInit {
   async ngOnInit() {
     await this.db.fetchCategories();
   }
-
 }

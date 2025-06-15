@@ -1,11 +1,13 @@
-import { Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { AppService } from '../../../services/app-service';
 
 @Component({
   selector: 'weighted-score',
   imports: [],
   templateUrl: './weighted-score.html',
-  styleUrl: './weighted-score.scss'
+  styleUrl: './weighted-score.scss',
+  standalone: true,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class WeightedScore {
   readonly appService = inject(AppService);

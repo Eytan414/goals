@@ -10,6 +10,7 @@ main {
 
         .datepicker {
             display: grid;
+            grid-template-columns: 1fr 1fr;
             font-weight: bold;
             input {
                 text-align: center;
