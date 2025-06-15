@@ -12,22 +12,12 @@ main {
         grid-template-columns: 1fr;
     }
 
-    &>section {
-        height: calc(100vh - 1rem);
-        max-height: 100%;
-        overflow: auto;
-        padding: 0 1rem;
-
-        @media(width < 777px) {
-            height: auto;
-            max-height: unset;
-            overflow: hidden;
-            padding: 0;
-        }
-    }
-
     section.categories-container {
         display: grid;
+        justify-self: center;
+        align-self: start;
+        padding-top: 1.5rem;
+        gap: 1rem;
 
         @media(width < 777px) {
             height: auto;
@@ -36,14 +26,24 @@ main {
 
     section.manage {
         width: 100%;
-        padding: 1rem 0;
+        height: 100vh;
+        overflow: auto;
 
-        summary {
-            cursor: pointer;
-            outline: 0;
+        @media(width < 777px) {
+            height: auto;
+            overflow: hidden;
+        }
 
-            h1 {
-                display: inline;
+        details {
+            padding: 1rem 0;
+
+            summary {
+                cursor: pointer;
+                outline: 0;
+
+                h1 {
+                    display: inline;
+                }
             }
         }
     }
