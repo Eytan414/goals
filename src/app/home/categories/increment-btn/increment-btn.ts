@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, inject, input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, input, signal } from '@angular/core';
 import { CategoryRecord, DBService } from '../../../services/db';
 
 @Component({
@@ -12,10 +12,12 @@ import { CategoryRecord, DBService } from '../../../services/db';
 export class IncrementBtn {
   private readonly db = inject(DBService);
   record = input.required<CategoryRecord>();
-  SLEEP_ID = 11;
+  //consider allowing list edit
+  binaryValueIds = signal<number[]>([11, 26]); // 0 or 1
 
   increment(record: CategoryRecord) {
-    if(record.categoryId === this.SLEEP_ID && record.value === 1) return;
+    if(record.value === 1 && this.binaryValueIds().includes(record.categoryId))
+      return;
     const newValue = {
       ...record,
       value: record.value + 1

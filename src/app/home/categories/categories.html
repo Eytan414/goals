@@ -10,9 +10,11 @@
     <div class="record" [class]="colorNegatives(r.categoryId)" 
         [style.fontSize.rem]="getFactor(r.categoryId)">
         <decrement-btn [record]="r" />
-        {{r.categoryId | categoryIdToName}}
-        :
-        {{r.value}}
+        <span>
+            {{r.categoryId | categoryIdToName}}
+            :
+            {{r.value}}
+        </span>
         <increment-btn [record]="r" />
     </div>
     }

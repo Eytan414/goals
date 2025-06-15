@@ -26,6 +26,12 @@ main {
         &.negative {
             color: red;
         }
+
+        span {
+            &:hover{
+                filter: blur(7px)
+            }
+        }
     }
 
     span {
