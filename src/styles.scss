@@ -3,7 +3,9 @@
     box-sizing: border-box;
     user-select: none;
     outline: none;
+    color-scheme: dark light;
 }
+
 
 body {
     margin: 0;
@@ -24,8 +26,6 @@ input {
 }
 
 input[type="date"] {
-    color-scheme: dark;
-
     &::-webkit-calendar-picker-indicator {
         cursor: pointer;
         filter: brightness(0) saturate(100%) invert(91%) sepia(4%) saturate(1151%) hue-rotate(200deg) brightness(101%) contrast(95%);
