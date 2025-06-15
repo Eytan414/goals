@@ -4,7 +4,7 @@
         <div class="datepicker">
             <input type="date" name="date" [(ngModel)]="appService.selectedDate" (ngModelChange)="onDateChange($event)"
                 [max]="appService.today" />
-            <span>{{dayOfWeek() | date:'EEEE'}}</span>
+            <span>{{appService.dayOfWeek() | date:'EEEE'}}</span>
         </div>
         <change-date direction="forward" />
     </div>

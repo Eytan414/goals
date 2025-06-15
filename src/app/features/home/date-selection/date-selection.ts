@@ -20,7 +20,6 @@ import { DatePipe } from '@angular/common';
 })
 export class DateSelection {
   readonly appService = inject(AppService);
-  dayOfWeek = signal<number>(new Date().getDay());
 
   onDateChange(selectedDate: Event) {
     const date = new Date(String(selectedDate)).toISOString().split('T')[0];
