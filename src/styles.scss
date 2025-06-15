@@ -9,6 +9,7 @@ body {
     margin: 0;
 }
 
+//Forms and inputs
 input {
     background-color: #1E2235;
     color: aquamarine;
@@ -22,16 +23,26 @@ input {
     }
 }
 
-input[type="date"]::-webkit-calendar-picker-indicator {
-    filter: brightness(0) saturate(100%) invert(91%) sepia(4%) saturate(1151%) hue-rotate(200deg) brightness(101%) contrast(95%);
+input[type="date"] {
+    color-scheme: dark;
+
+    &::-webkit-calendar-picker-indicator {
+        cursor: pointer;
+        filter: brightness(0) saturate(100%) invert(91%) sepia(4%) saturate(1151%) hue-rotate(200deg) brightness(101%) contrast(95%);
+    }
 }
 
-input[type="number"]::-webkit-outer-spin-button,
-input[type="number"]::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
+input[type="number"] {
+
+    &::-webkit-outer-spin-button,
+    &::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+
 }
 
+// Global Scrollers
 * {
     scrollbar-width: thin;
     scrollbar-color: #123 #7777;
