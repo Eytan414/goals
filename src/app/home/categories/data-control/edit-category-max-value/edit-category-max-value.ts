@@ -1,7 +1,9 @@
-import { AfterViewInit, ChangeDetectionStrategy, Component, computed, ElementRef, inject, input, output, signal, untracked, ViewChild, ViewContainerRef, ViewEncapsulation } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, Component, 
+  computed, ElementRef, inject, input, signal, untracked, 
+  ViewChild, ViewEncapsulation } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { Category, DBService } from '../../../services/db';
-import { AppService } from '../../../services/app-service';
+import { Category, DBService } from '../../../../services/db';
+import { AppService } from '../../../../services/app-service';
 
 @Component({
   selector: 'edit-category-max-value',
@@ -18,7 +20,7 @@ export class EditCategoryMaxValue implements AfterViewInit {
 
   private readonly db = inject(DBService);
   private readonly appService = inject(AppService);
-  @ViewChild("maxValueInput") maxValueInput!:ElementRef<HTMLInputElement>;
+  @ViewChild("maxValueInput") maxValueInput!: ElementRef<HTMLInputElement>;
   categoryId = input.required<number>();
 
   currentCategory = computed<Category>(() => {
@@ -30,10 +32,11 @@ export class EditCategoryMaxValue implements AfterViewInit {
     const currentCategory = untracked(() => this.currentCategory()); //do not reevaluate upon category change
     const categoryId = this.categoryId();
 
-    return currentCategory!.maxValue;
+    return currentCategory.maxValue;
   });
   newValue = signal<number>(NaN);
 
+  
   ngAfterViewInit(): void {
     this.maxValueInput.nativeElement.focus();
   }

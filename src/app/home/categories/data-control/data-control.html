@@ -1,0 +1,14 @@
+<div #trigger (click)="openEditMaxDialog(record().categoryId)">
+    {{record().categoryId | categoryIdToName}}
+    :
+    {{record().categoryId | categoryIdToMaxValue}}
+    {{record().value}}
+    <ng-template cdkConnectedOverlay 
+        (backdropClick)="showDialogForId.set(-1)" 
+        [cdkConnectedOverlayHasBackdrop]="true"
+        [cdkConnectedOverlayOrigin]="trigger"
+        [cdkConnectedOverlayOpen]="showDialogForId() === record().categoryId"
+    >
+        <edit-category-max-value [categoryId]="record().categoryId" />
+    </ng-template>
+</div>

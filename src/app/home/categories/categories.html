@@ -1,30 +1,17 @@
 <main>
     @let records = appService.sortedDateRecords();
     @for(r of records; track r.id){
+    @let _categories = appService.categories();
     <!-- 
     hack to trigger CD to avoid:
     looping over selectedDateRecords() && categories() signals 
     like in computed/etc which are heavier 
     -->
-    @let _categories = appService.categories();
-    <div class="record" [class]="colorNegatives(r.categoryId)" [style.fontSize.rem]="getFactor(r.categoryId)">
+    <div class="record" [class]="colorNegatives(r.categoryId)"
+        [style.fontSize.rem]="getFactor(r.categoryId)"
+    >
         <decrement-btn [record]="r" />
-        <!-- TODO:div->custom comp -->
-        <div #trigger (click)="openEditMaxDialog(r.categoryId)">
-            {{r.categoryId | categoryIdToName}}
-            :
-            {{r.categoryId | categoryIdToMaxValue}}
-            {{r.value}}
-            <ng-template cdkConnectedOverlay 
-                (backdropClick)="showDialogForId.set(-1)" 
-                [cdkConnectedOverlayHasBackdrop]="true"
-                [cdkConnectedOverlayOrigin]="trigger"
-                [cdkConnectedOverlayOpen]="showDialogForId() === r.categoryId"
-            >
-                <edit-category-max-value [categoryId]="r.categoryId" />
-            </ng-template>
-
-        </div>
+        <data-control  [record]="r" />
         <increment-btn [record]="r" />
     </div>
     }
