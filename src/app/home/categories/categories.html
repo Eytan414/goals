@@ -2,18 +2,20 @@
     @let records = appService.sortedDateRecords();
     @for(r of records; track r.id){
     <!-- 
-            hack to trigger CD to avoid:
-            looping over selectedDateRecords() && categories() signals 
-            like in computed/etc which are heavier 
-        -->
+    hack to trigger CD to avoid:
+    looping over selectedDateRecords() && categories() signals 
+    like in computed/etc which are heavier 
+    -->
     @let _categories = appService.categories();
-    <div class="record" [class]="colorNegatives(r.categoryId)" 
-        [style.fontSize.rem]="getFactor(r.categoryId)">
+    <div class="record" [class]="colorNegatives(r.categoryId)" [style.fontSize.rem]="getFactor(r.categoryId)">
         <decrement-btn [record]="r" />
-        <span>
+        <span (click)="openEditMaxDialog(r.categoryId)">
             {{r.categoryId | categoryIdToName}}
             :
             {{r.value}}
+            /
+            {{r.categoryId | categoryIdToMaxValue}}
+            <!-- קטגוריה:{{r.value}}-->
         </span>
         <increment-btn [record]="r" />
     </div>

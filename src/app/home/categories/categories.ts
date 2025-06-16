@@ -1,9 +1,11 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
 import { CategoryIdToNamePipe } from '../../pipes/category-id-to-name-pipe';
 import { DecrementBtn } from '../categories/decrement-btn/decrement-btn';
 import { IncrementBtn } from '../categories/increment-btn/increment-btn';
 import { AppService } from '../../services/app-service';
 import { WeightedScore } from './weighted-score/weighted-score';
+import { EditCategoryMaxValue } from './edit-category-max-value/edit-category-max-value';
+import { Dialog, DialogModule } from '@angular/cdk/dialog';
 
 @Component({
   selector: 'categories',
@@ -12,6 +14,7 @@ import { WeightedScore } from './weighted-score/weighted-score';
     IncrementBtn,
     DecrementBtn,
     WeightedScore,
+    DialogModule
   ],
   templateUrl: './categories.html',
   styleUrl: './categories.scss',
@@ -20,7 +23,13 @@ import { WeightedScore } from './weighted-score/weighted-score';
 })
 export class Categories {
   readonly appService = inject(AppService);
+  private readonly dialog = inject(Dialog);
+  showDialog = signal<boolean>(false);
 
+  openEditMaxDialog(categoryId: number) {
+    const dialogRef = this.dialog.open(EditCategoryMaxValue, { panelClass: "edit-dialog" });
+    dialogRef.componentRef?.setInput("categoryId", categoryId);
+  }
 
   getFactor(categoryId: number) {
     const baseFontSizeRem = .8;

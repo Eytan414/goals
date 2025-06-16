@@ -1,0 +1,32 @@
+main.edit-max-dialog {
+    display: grid;
+    gap: 1rem;
+
+    h1 {
+        font-size: 1rem;
+        margin: 0;
+    }
+
+    form {
+        display: flex;
+        gap: 1rem;
+        justify-content: center;
+
+        input {
+            width: 3ch;
+            text-align: center;
+        }
+
+        button {
+            padding: .375rem;
+        }
+    }
+}
+
+.edit-dialog {
+    background-color: #357e;
+    padding: 1rem;
+    border-radius: 0.75rem;
+    border: 3px dashed gold;
+    color: aquamarine;
+}

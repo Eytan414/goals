@@ -1,0 +1,8 @@
+<main class="edit-max-dialog">
+    <h1>עדכון ערך מקסימלי</h1>
+    <form #form="ngForm" (ngSubmit)="updateMaxValue()">
+        <button type="submit">עדכון</button>
+        <input type="number" name="maxValue" required [(ngModel)]="newValue"
+            [placeholder]="currentMaxValue()">
+    </form>
+</main>
