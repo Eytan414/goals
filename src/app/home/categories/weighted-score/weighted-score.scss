@@ -6,6 +6,12 @@ section.summary {
         1px -1px 0 black,
         -1px 1px 0 black,
         1px 1px 0 black;
+    height: 100%;
+    display: flex;
+    justify-self: center;
+    gap: .5rem;
+    align-items: center;
+    font-size: 1.75rem;
 
     &.bad {
         color: red;
@@ -13,5 +19,9 @@ section.summary {
 
     &.good {
         color: lime;
+    }
+    
+    span {
+        unicode-bidi: plaintext;
     }
 }

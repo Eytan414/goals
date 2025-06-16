@@ -16,8 +16,10 @@ main {
         display: grid;
         justify-self: center;
         align-self: start;
-        padding-top: 1.5rem;
         gap: 1rem;
+        padding-block: 1.5rem;
+        max-height: 100vh;
+        overflow: auto;
 
         @media(width < 777px) {
             height: auto;
@@ -35,7 +37,7 @@ main {
         }
 
         details {
-            padding: 1rem 0;
+            padding-block: 1.5rem;
 
             summary {
                 cursor: pointer;
