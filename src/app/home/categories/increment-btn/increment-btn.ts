@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, inject, input, signal } from '@angular/core';
 import { CategoryRecord, DBService } from '../../../services/db';
+import { AppService } from '../../../services/app-service';
 
 @Component({
   selector: 'increment-btn',
@@ -11,17 +12,22 @@ import { CategoryRecord, DBService } from '../../../services/db';
 })
 export class IncrementBtn {
   private readonly db = inject(DBService);
+  private readonly appService = inject(AppService);
   record = input.required<CategoryRecord>();
-  //consider allowing list edit
-  binaryValueIds = signal<number[]>([11, 26]); // 0 or 1
 
   increment(record: CategoryRecord) {
-    if(record.value === 1 && this.binaryValueIds().includes(record.categoryId))
-      return;
-    const newValue = {
+    if (!this.canIncrement(record)) return;
+
+    const newCategory = {
       ...record,
       value: record.value + 1
     }
-    this.db.updateRecord(newValue);
+    this.db.updateRecord(newCategory);
+  }
+
+  private canIncrement(record: CategoryRecord): boolean {
+    const { maxValue } = this.appService.categories()
+      .find(c => c.id === record.categoryId)!;
+    return maxValue === -1 ? true : maxValue > record.value;
   }
 }

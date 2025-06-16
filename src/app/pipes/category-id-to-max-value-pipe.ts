@@ -13,7 +13,7 @@ export class CategoryIdToMaxValuePipe implements PipeTransform {
     const { maxValue } = this.#appService.categories()
       .find(c => c.id === value)!;
     
-      return maxValue === -1 ? '∞' : maxValue;
+      return maxValue === -1 ? '' : maxValue + ' /';
     
   }
 }
