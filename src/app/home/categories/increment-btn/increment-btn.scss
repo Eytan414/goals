@@ -3,15 +3,11 @@ button {
     width: 1.5rem;
     display: grid;
     place-items: center;
-    padding: 0;
     background: transparent;
-    border: 0;
-    cursor: pointer;
-
-    &.increment {
-        color: darkgreen;
-        &:hover{
-            color: lime;
-        }
+    color: darkgreen;
+    
+    &:hover {
+        background: transparent;
+        color: lime;
     }
 }
