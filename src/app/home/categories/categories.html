@@ -12,9 +12,9 @@
         <span (click)="openEditMaxDialog(r.categoryId)">
             {{r.categoryId | categoryIdToName}}
             :
-            {{r.value}}
-            /
             {{r.categoryId | categoryIdToMaxValue}}
+            /
+            {{r.value}}
             <!-- קטגוריה:{{r.value}}-->
         </span>
         <increment-btn [record]="r" />

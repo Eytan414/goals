@@ -23,7 +23,8 @@ export class CategoryAddForm {
   addNewCategory(addNewCategoryForm: NgForm) {
     const newCategory: Category = {
       name: this.newCategoryName(),
-      weight: this.newCategoryWeight()
+      weight: this.newCategoryWeight(),
+      maxValue: -1,
     };
     this.db.addNewCategory(newCategory);
     addNewCategoryForm.reset();

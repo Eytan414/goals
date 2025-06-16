@@ -6,11 +6,13 @@ import { AppService } from '../../services/app-service';
 import { WeightedScore } from './weighted-score/weighted-score';
 import { EditCategoryMaxValue } from './edit-category-max-value/edit-category-max-value';
 import { Dialog, DialogModule } from '@angular/cdk/dialog';
+import { CategoryIdToMaxValuePipe } from '../../pipes/category-id-to-max-value-pipe';
 
 @Component({
   selector: 'categories',
   imports: [
     CategoryIdToNamePipe,
+    CategoryIdToMaxValuePipe,
     IncrementBtn,
     DecrementBtn,
     WeightedScore,

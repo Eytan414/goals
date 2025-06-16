@@ -1,7 +1,8 @@
 import { ChangeDetectionStrategy, Component, computed, inject, input, output, signal, untracked, ViewEncapsulation } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { DBService } from '../../../services/db';
+import { Category, DBService } from '../../../services/db';
 import { AppService } from '../../../services/app-service';
+import { DialogRef } from '@angular/cdk/dialog';
 
 @Component({
   selector: 'edit-category-max-value',
@@ -17,16 +18,27 @@ import { AppService } from '../../../services/app-service';
 export class EditCategoryMaxValue {
   private readonly db = inject(DBService);
   private readonly app = inject(AppService);
-  dialogClosed = output<boolean>();
+  private readonly dialogRef = inject(DialogRef);
   categoryId = input.required<number>();
-  currentMaxValue = computed(() => {
-    const categoryId = this.categoryId();
-    const categories = untracked(() => this.app.categories()); //do not reevaluate upon categoy change
-    return categories.find(c => c.id === categoryId)?.maxValue;
+
+  currentCategory = computed<Category>(() => {
+    const categories = untracked(() => this.app.categories()); //do not reevaluate upon category change
+    return categories.find(c => c.id === this.categoryId())!;
   });
+
+  currentMaxValue = computed<number>(() => {
+    const currentCategory = untracked(() => this.currentCategory()); //do not reevaluate upon category change
+    const categoryId = this.categoryId();
+
+    return currentCategory!.maxValue;
+  });
+
   newValue = signal<number>(NaN);
 
   updateMaxValue(){
-    this.dialogClosed.emit(true);
+    const newCategory = {...this.currentCategory()};
+    newCategory.maxValue = this.newValue();
+    this.db.updateCategory(newCategory);
+    this.dialogRef.close()
   }
 }
