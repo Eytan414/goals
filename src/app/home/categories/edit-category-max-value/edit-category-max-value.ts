@@ -1,8 +1,7 @@
-import { ChangeDetectionStrategy, Component, computed, inject, input, output, signal, untracked, ViewEncapsulation } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, Component, computed, ElementRef, inject, input, output, signal, untracked, ViewChild, ViewContainerRef, ViewEncapsulation } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Category, DBService } from '../../../services/db';
 import { AppService } from '../../../services/app-service';
-import { DialogRef } from '@angular/cdk/dialog';
 
 @Component({
   selector: 'edit-category-max-value',
@@ -15,14 +14,15 @@ import { DialogRef } from '@angular/cdk/dialog';
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None
 })
-export class EditCategoryMaxValue {
+export class EditCategoryMaxValue implements AfterViewInit {
+
   private readonly db = inject(DBService);
-  private readonly app = inject(AppService);
-  private readonly dialogRef = inject(DialogRef);
+  private readonly appService = inject(AppService);
+  @ViewChild("maxValueInput") maxValueInput!:ElementRef<HTMLInputElement>;
   categoryId = input.required<number>();
 
   currentCategory = computed<Category>(() => {
-    const categories = untracked(() => this.app.categories()); //do not reevaluate upon category change
+    const categories = untracked(() => this.appService.categories()); //do not reevaluate upon category change
     return categories.find(c => c.id === this.categoryId())!;
   });
 
@@ -32,13 +32,15 @@ export class EditCategoryMaxValue {
 
     return currentCategory!.maxValue;
   });
-
   newValue = signal<number>(NaN);
 
-  updateMaxValue(){
-    const newCategory = {...this.currentCategory()};
+  ngAfterViewInit(): void {
+    this.maxValueInput.nativeElement.focus();
+  }
+
+  updateMaxValue() {
+    const newCategory = { ...this.currentCategory() };
     newCategory.maxValue = this.newValue();
     this.db.updateCategory(newCategory);
-    this.dialogRef.close()
   }
 }

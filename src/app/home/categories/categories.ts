@@ -7,6 +7,7 @@ import { WeightedScore } from './weighted-score/weighted-score';
 import { EditCategoryMaxValue } from './edit-category-max-value/edit-category-max-value';
 import { Dialog, DialogModule } from '@angular/cdk/dialog';
 import { CategoryIdToMaxValuePipe } from '../../pipes/category-id-to-max-value-pipe';
+import { OverlayModule } from '@angular/cdk/overlay';
 
 @Component({
   selector: 'categories',
@@ -16,8 +17,10 @@ import { CategoryIdToMaxValuePipe } from '../../pipes/category-id-to-max-value-p
     IncrementBtn,
     DecrementBtn,
     WeightedScore,
-    DialogModule
-  ],
+    DialogModule,
+    EditCategoryMaxValue,
+    OverlayModule
+],
   templateUrl: './categories.html',
   styleUrl: './categories.scss',
   standalone: true,
@@ -26,11 +29,10 @@ import { CategoryIdToMaxValuePipe } from '../../pipes/category-id-to-max-value-p
 export class Categories {
   readonly appService = inject(AppService);
   private readonly dialog = inject(Dialog);
-  showDialog = signal<boolean>(false);
+  showDialogForId = signal<number>(-1);
 
   openEditMaxDialog(categoryId: number) {
-    const dialogRef = this.dialog.open(EditCategoryMaxValue, { panelClass: "edit-dialog" });
-    dialogRef.componentRef?.setInput("categoryId", categoryId);
+    this.showDialogForId.set(categoryId);
   }
 
   getFactor(categoryId: number) {

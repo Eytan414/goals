@@ -27,10 +27,8 @@ main {
             color: red;
         }
 
-        span {
-            &:hover{
-                // filter: blur(7px)
-            }
+        div {
+            cursor: pointer;
         }
     }
 

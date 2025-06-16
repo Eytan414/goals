@@ -9,14 +9,22 @@
     @let _categories = appService.categories();
     <div class="record" [class]="colorNegatives(r.categoryId)" [style.fontSize.rem]="getFactor(r.categoryId)">
         <decrement-btn [record]="r" />
-        <span (click)="openEditMaxDialog(r.categoryId)">
+        <!-- TODO:div->custom comp -->
+        <div #trigger (click)="openEditMaxDialog(r.categoryId)">
             {{r.categoryId | categoryIdToName}}
             :
             {{r.categoryId | categoryIdToMaxValue}}
-            /
             {{r.value}}
-            <!-- קטגוריה:{{r.value}}-->
-        </span>
+            <ng-template cdkConnectedOverlay 
+                (backdropClick)="showDialogForId.set(-1)" 
+                [cdkConnectedOverlayHasBackdrop]="true"
+                [cdkConnectedOverlayOrigin]="trigger"
+                [cdkConnectedOverlayOpen]="showDialogForId() === r.categoryId"
+            >
+                <edit-category-max-value [categoryId]="r.categoryId" />
+            </ng-template>
+
+        </div>
         <increment-btn [record]="r" />
     </div>
     }

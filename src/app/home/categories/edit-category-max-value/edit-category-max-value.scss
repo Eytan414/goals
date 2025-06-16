@@ -1,6 +1,11 @@
 main.edit-max-dialog {
     display: grid;
     gap: 1rem;
+    background-color: #357e;
+    padding: 1rem;
+    border-radius: 0.75rem;
+    border: 3px dashed gold;
+    color: aquamarine;
 
     h1 {
         font-size: 1rem;
@@ -21,12 +26,4 @@ main.edit-max-dialog {
             padding: .375rem;
         }
     }
-}
-
-.edit-dialog {
-    background-color: #357e;
-    padding: 1rem;
-    border-radius: 0.75rem;
-    border: 3px dashed gold;
-    color: aquamarine;
 }
