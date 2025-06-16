@@ -81,6 +81,7 @@ export interface Category {
   id?: number;
   weight: number;
   name: string;
+  maxValue: number;
 }
 export interface CategoryRecord {
   id?: number;
@@ -94,10 +95,15 @@ class DB extends Dexie {
 
   constructor() {
     super('Database');
-    this.version(9).stores({
-      records: '++id, categoryId, value, date',
-      categories: '++id, name, weight',
+    this.version(12).stores({
+      records: '++id, date',
+      categories: '++id',
     })
+    // .upgrade(tx => {
+    //   return tx.table('categories').toCollection().modify(cat => {
+    //     cat.maxValue = -1;
+    //   });
+    // });
   }
 }
 const db = new DB();
