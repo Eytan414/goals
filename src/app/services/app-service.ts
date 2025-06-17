@@ -22,6 +22,7 @@ export class AppService {
   sortedDateRecords = computed<CategoryRecord[]>(
     () => this.selectedDateRecords().sort(this.compareFn));
   extremaScores = signal<MinMax>({ min: 999, max: -999 });
+  actionCount = signal<number>(0);
 
 
   private compareFn = (a: CategoryRecord, b: CategoryRecord): number => {

@@ -23,6 +23,7 @@ export class IncrementBtn {
       value: record.value + 1
     }
     this.db.updateRecord(newCategory);
+    this.appService.actionCount.update(c => c + 1);
   }
 
   private canIncrement(record: CategoryRecord): boolean {
