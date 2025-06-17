@@ -12,8 +12,10 @@
     "isolatedModules": true,
     "experimentalDecorators": true,
     "importHelpers": true,
-    "target": "ES2023",
-    "module": "preserve"
+    "target": "ES2024",
+    "lib": ["ES2024", "DOM"],
+    "module": "preserve",
+
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
