@@ -2,7 +2,7 @@
 <section [class]="{'bad': score < 0, 'good': score > 15 }" class="summary">
     <span>משוקלל יומי: {{ score }}</span>
     <div class="divider"></div>
-    <div [style.fontSize.rem]="1">
+    <div class="extrema">
         <div>שיאים:</div>
         <div> {{ formattedExtrema() }} </div>
     </div>
