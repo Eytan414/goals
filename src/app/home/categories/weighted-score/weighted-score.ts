@@ -1,5 +1,6 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, effect, inject } from '@angular/core';
 import { AppService } from '../../../services/app-service';
+import { DBService } from '../../../services/db';
 
 @Component({
   selector: 'weighted-score',
@@ -10,16 +11,11 @@ import { AppService } from '../../../services/app-service';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class WeightedScore {
+  private readonly db = inject(DBService);
   readonly appService = inject(AppService);
-
-  weightedScore(): number {
-    const records = this.appService.selectedDateRecords();
-    const categories = this.appService.categories();
-    let total = 0;
-    records.forEach(r => {
-      const category = categories.find(c => c.id === r.categoryId);
-      total += (r.value * category!.weight)
-    })
-    return total;
+  e = effect(() => this.db.getExtremaScores());
+  
+  formattedExtrema() {
+    return `${this.appService.extremaScores().min} | ${this.appService.extremaScores().max}`;
   }
 }

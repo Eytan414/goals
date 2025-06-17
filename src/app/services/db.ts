@@ -1,7 +1,8 @@
+
 import { inject, Injectable } from '@angular/core';
 import Dexie, { Table } from 'dexie';
-import { AppService } from './app-service';
-import { from, switchMap, mergeMap } from 'rxjs';
+import { AppService, MinMax } from './app-service';
+import { min } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class DBService {
@@ -28,6 +29,30 @@ export class DBService {
     await db.records.put(newRecord);
     this.reloadRecords();
   }
+
+  async getExtremaScores() {
+    const records = await db.records.toArray();
+    Object.groupBy(records, r => r.date ?? 'unknown');
+
+    const groupedByDate = Object.groupBy(records, (r => r.date));
+    const results: { date: string; score: number }[] = [];
+    for (const date in groupedByDate) {
+      const result = {
+        date,
+        score: this.appService.weightedScore(groupedByDate[date]!)
+      }
+      results.push(result);
+    }
+    const minmax: MinMax = { min: 999, max: -999 };
+    for (const result of results) {
+      if (result.score < minmax.min)
+        minmax.min = result.score;
+      if (result.score > minmax.max)
+        minmax.max = result.score;
+    }
+    this.appService.extremaScores.set(minmax);
+  }
+
 
   async reloadRecords() {
     const date = this.appService.selectedDate();

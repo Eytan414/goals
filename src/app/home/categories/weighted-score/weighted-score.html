@@ -1,5 +1,9 @@
-@let score = weightedScore();
+@let score = appService.weightedScore();
 <section [class]="{'bad': score < 0, 'good': score > 15 }" class="summary">
-    <span>משוקלל יומי:</span>
-    <span> {{ score }}</span>
+    <span>משוקלל יומי: {{ score }}</span>
+    <div class="divider"></div>
+    <div [style.fontSize.rem]="1">
+        <div>שיאים:</div>
+        <div> {{ formattedExtrema() }} </div>
+    </div>
 </section>

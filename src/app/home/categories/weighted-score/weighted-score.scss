@@ -1,7 +1,6 @@
 section.summary {
     font-size: 1.375rem;
     font-weight: bold;
-    letter-spacing: .5px;
     text-shadow: -1px -1px 0 black,
         1px -1px 0 black,
         -1px 1px 0 black,
@@ -9,9 +8,8 @@ section.summary {
     height: 100%;
     display: flex;
     justify-self: center;
-    gap: .5rem;
+    gap: 1rem;
     align-items: center;
-    font-size: 1.75rem;
 
     &.bad {
         color: red;
@@ -20,8 +18,15 @@ section.summary {
     &.good {
         color: lime;
     }
-    
+
     span {
         unicode-bidi: plaintext;
+    }
+
+    .divider {
+        border-radius: 1rem;
+        width: 1px;
+        height: 90%;
+        background-color: currentColor;
     }
 }
