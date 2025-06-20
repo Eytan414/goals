@@ -7,35 +7,24 @@ import { Category, CategoryRecord } from './db';
 export class AppService {
   // readonly today = this.getPersonalLocalTZ().toISOString().split('T')[0];
   readonly today = new Date().toISOString().split('T')[0];
-  categories = signal<Category[]>([]);
-  categoryWeights = computed<MinMax>(() => {
+  readonly categories = signal<Category[]>([]);
+  readonly categoryWeights = computed<MinMax>(() => {
     const weights = this.categories().map(c => c.weight);
     const min = Math.min(...weights);
     const max = Math.max(...weights);
     return { min, max } as MinMax;
   });
 
-  selectedDate = signal<string>(this.today);
-  dayOfWeek = computed<Date>(() => new Date(this.selectedDate()));
+  readonly selectedDate = signal<string>(this.today);
+  readonly dayOfWeek = computed<Date>(() => new Date(this.selectedDate()));
 
-  selectedDateRecords = signal<CategoryRecord[]>([]);
-  sortedDateRecords = computed<CategoryRecord[]>(
-    () => this.selectedDateRecords().sort(this.compareFn));
-  extremaScores = signal<MinMax>({ min: 999, max: -999 });
-  actionCount = signal<number>(0);
-
-
-  private compareFn = (a: CategoryRecord, b: CategoryRecord): number => {
-    const categories = this.categories().map(c => ({ id: c.id, weight: c.weight }));
-    const aWeight: number = categories.find(c => c.id === a.categoryId)!.weight;
-    const bWeight: number = categories.find(c => c.id === b.categoryId)!.weight;
-    return Math.abs(aWeight) - Math.abs(bWeight);
-  }
-
-  private getPersonalLocalTZ(): Date {
-    const ms3Hours = 3 * 60 * 60 * 1000;
-    return new Date(new Date().getTime() + ms3Hours);
-  }
+  readonly selectedDateRecords = signal<CategoryRecord[]>([]);
+  readonly sortedDateRecords = computed<CategoryRecord[]>(() => {
+    const mappedForSortCategories = this.categories().map(c => ({ id: c.id, weight: c.weight }));
+    return this.selectedDateRecords().toSorted(this.makeComparator(mappedForSortCategories))
+  });
+  readonly extremaScores = signal<MinMax>({ min: 999, max: -999 });
+  readonly actionCount = signal<number>(0);
 
   weightedScore(records: CategoryRecord[] = this.selectedDateRecords()): number {
     const categories = this.categories();
@@ -45,6 +34,19 @@ export class AppService {
       total += (r.value * category!.weight)
     })
     return total;
+  }
+
+  private makeComparator(mappedForSortCategories: Partial<Category>[]) {
+    return (a: CategoryRecord, b: CategoryRecord): number => {
+      const aWeight: number = mappedForSortCategories.find(c => c.id === a.categoryId)!.weight!;
+      const bWeight: number = mappedForSortCategories.find(c => c.id === b.categoryId)!.weight!;
+      return Math.abs(aWeight) - Math.abs(bWeight);
+    }
+  }
+
+  private getPersonalLocalTZ(): Date {
+    const ms3Hours = 3 * 60 * 60 * 1000;
+    return new Date(new Date().getTime() + ms3Hours);
   }
 }
 

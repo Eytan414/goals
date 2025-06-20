@@ -12,14 +12,14 @@ import { DBService } from '../../../services/db';
 })
 export class WeightedScore {
   private readonly db = inject(DBService);
-  readonly appService = inject(AppService);
+  protected readonly appService = inject(AppService);
   
-  calculateExtremaScoresEffect = effect(() => {
+  private calculateExtremaScoresEffect = effect(() => {
     this.appService.actionCount();
     this.db.getExtremaScores()
   });
   
-  formattedExtrema() {
+  protected formattedExtrema() {
     return `${this.appService.extremaScores().min} | ${this.appService.extremaScores().max}`;
   }
 }

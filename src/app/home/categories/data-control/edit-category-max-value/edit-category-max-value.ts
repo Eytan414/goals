@@ -1,6 +1,9 @@
-import { AfterViewInit, ChangeDetectionStrategy, Component, 
-  computed, ElementRef, inject, input, signal, untracked, 
-  ViewChild, ViewEncapsulation } from '@angular/core';
+import {
+  AfterViewInit, ChangeDetectionStrategy, Component,
+  computed, ElementRef, inject, input, model, signal, untracked,
+  ViewChild, ViewEncapsulation,
+  WritableSignal
+} from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Category, DBService } from '../../../../services/db';
 import { AppService } from '../../../../services/app-service';
@@ -20,30 +23,32 @@ export class EditCategoryMaxValue implements AfterViewInit {
 
   private readonly db = inject(DBService);
   private readonly appService = inject(AppService);
-  @ViewChild("maxValueInput") maxValueInput!: ElementRef<HTMLInputElement>;
-  categoryId = input.required<number>();
+  @ViewChild("maxValueInput") private maxValueInput!: ElementRef<HTMLInputElement>;
+  readonly categoryId = input.required<number>();
+  readonly dialogTrigger = model.required();
 
-  currentCategory = computed<Category>(() => {
+  protected currentCategory = computed<Category>(() => {
     const categories = untracked(() => this.appService.categories()); //do not reevaluate upon category change
     return categories.find(c => c.id === this.categoryId())!;
   });
 
-  currentMaxValue = computed<number>(() => {
+  protected currentMaxValue = computed<number>(() => {
     const currentCategory = untracked(() => this.currentCategory()); //do not reevaluate upon category change
     const categoryId = this.categoryId();
 
     return currentCategory.maxValue;
   });
-  newValue = signal<number>(NaN);
+  protected newValue = signal<number>(NaN);
 
-  
+
   ngAfterViewInit(): void {
     this.maxValueInput.nativeElement.focus();
   }
 
-  updateMaxValue() {
+  protected updateMaxValue() {
     const newCategory = { ...this.currentCategory() };
     newCategory.maxValue = this.newValue();
     this.db.updateCategory(newCategory);
+    this.dialogTrigger.set(-1);
   }
 }

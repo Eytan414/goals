@@ -13,9 +13,9 @@ import { AppService } from '../../../services/app-service';
 export class IncrementBtn {
   private readonly db = inject(DBService);
   private readonly appService = inject(AppService);
-  record = input.required<CategoryRecord>();
+  readonly record = input.required<CategoryRecord>();
 
-  increment(record: CategoryRecord) {
+  protected increment(record: CategoryRecord) {
     if (!this.canIncrement(record)) return;
 
     const newCategory = {

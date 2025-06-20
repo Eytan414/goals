@@ -8,7 +8,6 @@ import { CategoryFormControls } from '../category-form-controls/category-form-co
   selector: 'category-edit-form',
   imports: [
     FormsModule,
-    CategoryFormControls,
   ],
   viewProviders: [{ provide: ControlContainer, useExisting: NgForm }],
   templateUrl: './category-edit-form.html',
@@ -18,16 +17,16 @@ import { CategoryFormControls } from '../category-form-controls/category-form-co
 })
 export class CategoryEditForm {
   private readonly db = inject(DBService);
-  readonly appService = inject(AppService);
+  protected readonly appService = inject(AppService);
 
-  manageCategoriesForm = input.required<NgForm>();
-  category = input.required<Category>();
-  index = input.required<number>();
+  readonly manageCategoriesForm = input.required<NgForm>();
+  readonly category = input.required<Category>();
+  readonly index = input.required<number>();
+  
+  protected readonly editCategoryNames = signal<string[]>([]);
+  protected readonly editCategoryWeights = signal<number[]>([]);
 
-  editCategoryNames = signal<string[]>([]);
-  editCategoryWeights = signal<number[]>([]);
-
-  updateCategory(form: NgForm, id: number, i: number) {
+  protected updateCategory(form: NgForm, id: number, i: number) {
     const currentCategory: Category = this.appService.categories()
       .find(c => c.id === id)!;
     const newCategory = {
@@ -39,14 +38,14 @@ export class CategoryEditForm {
     form.reset();
   }
 
-  isFormDisabled(form: NgForm, i: number) {
+  protected isFormDisabled(form: NgForm, i: number) {
     //TODO: needs testing and refinement (consider allow only 1 form-submit btn enabled at same time)
     return !this.editCategoryWeights()[i]
       && !this.editCategoryNames()[i];
   }
 
 
-  deleteCategory(id: number) {
+  protected deleteCategory(id: number) {
     const categoryToDelete: Category = this.appService.categories()
       .find(c => c.id === id)!;
 

@@ -8,7 +8,6 @@ import { min } from 'rxjs';
 export class DBService {
   private readonly appService = inject(AppService);
 
-
   async deleteCategory(id: number) {
     await db.categories.where({ id }).delete();
     await db.records.where('categoryId').equals(id).delete();
@@ -53,9 +52,9 @@ export class DBService {
     this.appService.extremaScores.set(minmax);
   }
 
-
-  async reloadRecords() {
+  private async reloadRecords() {
     const date = this.appService.selectedDate();
+    this.appService.selectedDateRecords.set([]);
     const recordsForDate = await db.records
       .where("date")
       .equals(date)
@@ -120,14 +119,12 @@ class DB extends Dexie {
 
   constructor() {
     super('Database');
-    this.version(12).stores({
-      records: '++id, date',
+    this.version(14).stores({
+      records: '++id, date, categoryId',
       categories: '++id',
     })
     // .upgrade(tx => {
-    //   return tx.table('categories').toCollection().modify(cat => {
-    //     cat.maxValue = -1;
-    //   });
+    //   const store = tx.table<CategoryRecord, number>('records');
     // });
   }
 }

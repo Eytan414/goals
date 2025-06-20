@@ -4,27 +4,24 @@ import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'date-control',
-  imports: [
-    FormsModule,
-
-  ],
+  imports: [FormsModule],
   templateUrl: './date-control.html',
   styleUrl: './date-control.scss',
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DateControl {
-  readonly appService = inject(AppService);
-  isTodaySelected = computed<boolean>(() => 
+  protected readonly appService = inject(AppService);
+  protected readonly isTodaySelected = computed<boolean>(() => 
     this.appService.selectedDate() === this.appService.today
   );
 
-  onDateChange(selectedDate: Event) {
+  protected onDateChange(selectedDate: Event) {
     const date = new Date(String(selectedDate)).toISOString().split('T')[0];
     this.appService.selectedDate.set(date);
   }
 
-  jumpToToday(){
+  protected jumpToToday(){
     this.appService.selectedDate.set(this.appService.today);
   }
 }

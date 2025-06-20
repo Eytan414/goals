@@ -3,7 +3,6 @@ import { DecrementBtn } from '../categories/decrement-btn/decrement-btn';
 import { IncrementBtn } from '../categories/increment-btn/increment-btn';
 import { AppService } from '../../services/app-service';
 import { WeightedScore } from './weighted-score/weighted-score';
-import { Dialog, DialogModule } from '@angular/cdk/dialog';
 import { DataControl } from './data-control/data-control';
 
 @Component({
@@ -12,7 +11,6 @@ import { DataControl } from './data-control/data-control';
     IncrementBtn,
     DecrementBtn,
     WeightedScore,
-    DialogModule,
     DataControl,
   ],
   templateUrl: './categories.html',
@@ -21,17 +19,16 @@ import { DataControl } from './data-control/data-control';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Categories {
-  readonly appService = inject(AppService);
-  private readonly dialog = inject(Dialog);
+  protected readonly appService = inject(AppService);
 
-  getFactor(categoryId: number) {
+  protected getFactor(categoryId: number) {
     const baseFontSizeRem = .8;
     const { weight } = this.appService.categories().find(c => c.id === categoryId)!;
     const normalized = this.calculateNormalizedWeight(weight);
     return normalized + baseFontSizeRem;
   }
 
-  colorNegatives(categoryId: number) {
+  protected colorNegatives(categoryId: number) {
     const { weight } = this.appService.categories().find(c => c.id === categoryId)!;
     return weight < 0 ? 'negative ' : '';
   }

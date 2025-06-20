@@ -19,11 +19,10 @@ import { OverlayModule } from '@angular/cdk/overlay';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DataControl {
-  record = input.required<CategoryRecord>();
-  
-  showDialogForId = signal<number>(-1);
+  readonly record = input.required<CategoryRecord>();
+  protected showDialogForId = signal<number>(-1);
 
-  openEditMaxDialog(categoryId: number) {
+  protected openEditMaxDialog(categoryId: number) {
     this.showDialogForId.set(categoryId);
   }
 

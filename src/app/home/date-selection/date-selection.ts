@@ -20,6 +20,6 @@ import { DateControl } from './date-control/date-control';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DateSelection {
-  readonly appService = inject(AppService);
+  protected readonly appService = inject(AppService);
 
 }

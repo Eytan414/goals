@@ -9,6 +9,6 @@
         [cdkConnectedOverlayOrigin]="trigger"
         [cdkConnectedOverlayOpen]="showDialogForId() === record().categoryId"
     >
-        <edit-category-max-value [categoryId]="record().categoryId" />
+        <edit-category-max-value [(dialogTrigger)]="showDialogForId" [categoryId]="record().categoryId" />
     </ng-template>
 </div>

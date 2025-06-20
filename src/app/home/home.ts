@@ -22,9 +22,9 @@ import { DateSelection } from './date-selection/date-selection';
 })
 export class Home implements OnInit {
   private readonly db = inject(DBService);
-  readonly appService = inject(AppService);
+  protected readonly appService = inject(AppService);
 
-  dateChangeEffect = effect(async () => {
+  private dateChangeEffect = effect(async () => {
     const date = this.appService.selectedDate();
     return await this.db.fetchRecordsByDate(date);
   });

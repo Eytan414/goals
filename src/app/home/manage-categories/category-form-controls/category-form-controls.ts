@@ -13,8 +13,8 @@ import { FormsModule } from '@angular/forms';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CategoryFormControls {
-  categoryName = input.required<string>();
-  categoryWeight = input.required<number>();
-  namePlaceholder = input.required<string>();
-  weightPlaceholder = input.required<number | string>();
+  protected readonly categoryName = input.required<string>();
+  protected readonly namePlaceholder = input.required<string>();
+  protected readonly categoryWeight = input.required<number>();
+  protected readonly weightPlaceholder = input.required<number | string>();
 }

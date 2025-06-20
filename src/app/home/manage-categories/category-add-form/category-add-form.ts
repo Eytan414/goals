@@ -1,11 +1,13 @@
 import { ChangeDetectionStrategy, Component, inject, input, signal } from '@angular/core';
 import { ControlContainer, FormsModule, NgForm } from '@angular/forms';
 import { Category, DBService } from '../../../services/db';
+import { CategoryFormControls } from '../category-form-controls/category-form-controls';
 
 @Component({
   selector: 'category-add-form',
   imports: [
     FormsModule,
+    CategoryFormControls,
   ],
   viewProviders: [{ provide: ControlContainer, useExisting: NgForm }],
   templateUrl: './category-add-form.html',
@@ -15,12 +17,12 @@ import { Category, DBService } from '../../../services/db';
 })
 export class CategoryAddForm {
   private readonly db = inject(DBService);
-  addNewCategoryForm = input.required<NgForm>();
+  readonly addNewCategoryForm = input.required<NgForm>();
 
-  newCategoryName = signal<string>('');
-  newCategoryWeight = signal<number>(NaN);
+  protected readonly newCategoryName = signal<string>('');
+  protected readonly newCategoryWeight = signal<number>(NaN);
 
-  addNewCategory(addNewCategoryForm: NgForm) {
+  protected addNewCategory(addNewCategoryForm: NgForm) {
     const newCategory: Category = {
       name: this.newCategoryName(),
       weight: this.newCategoryWeight(),

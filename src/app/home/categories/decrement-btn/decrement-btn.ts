@@ -13,9 +13,9 @@ import { AppService } from '../../../services/app-service';
 export class DecrementBtn {
   private readonly db = inject(DBService);
   private readonly appService = inject(AppService);
-  record = input.required<CategoryRecord>();
+  readonly record = input.required<CategoryRecord>();
 
-  decrement(record: CategoryRecord) {
+  protected decrement(record: CategoryRecord) {
     if (record.value === 0) return;
     const newValue = {
       ...record,
