@@ -2,8 +2,13 @@ main {
     display: flex;
     gap: 1rem;
 
-    input {
-        text-align: center;
+    label {
+        //visible only to screenreaders
+        font-size: 0;
+        input {
+            text-align: center;
+
+        }
     }
 
     span {
@@ -11,11 +16,12 @@ main {
         align-self: end;
         cursor: pointer;
         visibility: hidden;
-        &:hover{
+
+        &:hover {
             filter: invert(1);
         }
 
-        &.visible{
+        &.visible {
             visibility: visible;
         }
     }
