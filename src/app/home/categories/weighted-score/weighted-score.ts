@@ -13,19 +13,17 @@ import { DBService } from '../../../services/db';
 export class WeightedScore {
   private readonly db = inject(DBService);
   protected readonly appService = inject(AppService);
-  
-  protected readonly extrema = computed<MinMax>(() => {
-    return this.appService.extremaScores();
+
+  protected readonly extremaDefaults = computed(() => {
+    const extrema = this.appService.extremaScores();
+    return extrema.max === -999 && extrema.min === 999
   });
-  
-  
-  // computed<MinMax>(() => this.appService.extremaScores());
 
   private calculateExtremaScoresEffect = effect(() => {
     this.appService.actionCount();
     this.db.getExtremaScores()
   });
-  
+
   protected formattedExtrema() {
     return `${this.appService.extremaScores().min} | ${this.appService.extremaScores().max}`;
   }
