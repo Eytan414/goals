@@ -11,7 +11,7 @@ import { AppService } from '../../../services/app-service';
 })
 export class ChangeDate {
   private readonly appService = inject(AppService);
-  protected readonly direction = input.required<string>();
+  readonly direction = input.required<string>();
 
   protected changeDate() {
     const currentSelectedDate = this.appService.selectedDate();
