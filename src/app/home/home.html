@@ -1,7 +1,9 @@
 <main>
     <section class="categories-container">
         <section>
+            @defer (on immediate) {
             <date-selection />
+            }
         </section>
         <section class="categories">
             <categories />
@@ -13,7 +15,9 @@
             <summary>
                 <h1>ניהול קטגוריות:</h1>
             </summary>
+            @defer (on immediate) {
             <manage-categories />
+            }
         </details>
     </section>
 </main>
