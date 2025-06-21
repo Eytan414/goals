@@ -2,7 +2,7 @@
 <section [class]="{'bad': score < 0, 'good': score > 15 }" class="summary">
     <span>משוקלל יומי: {{ score }}</span>
     <div class="divider"></div>
-    <div class="extrema">
+    <div class="extrema" [style.display]="extrema().max === -999 && extrema().min === 999 ? 'none' : 'block'">
         <div>שיאים:</div>
         <div> {{ formattedExtrema() }} </div>
     </div>

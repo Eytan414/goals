@@ -1,5 +1,5 @@
-import { ChangeDetectionStrategy, Component, effect, inject } from '@angular/core';
-import { AppService } from '../../../services/app-service';
+import { ChangeDetectionStrategy, Component, computed, effect, inject } from '@angular/core';
+import { AppService, MinMax } from '../../../services/app-service';
 import { DBService } from '../../../services/db';
 
 @Component({
@@ -14,6 +14,13 @@ export class WeightedScore {
   private readonly db = inject(DBService);
   protected readonly appService = inject(AppService);
   
+  protected readonly extrema = computed<MinMax>(() => {
+    return this.appService.extremaScores();
+  });
+  
+  
+  // computed<MinMax>(() => this.appService.extremaScores());
+
   private calculateExtremaScoresEffect = effect(() => {
     this.appService.actionCount();
     this.db.getExtremaScores()
