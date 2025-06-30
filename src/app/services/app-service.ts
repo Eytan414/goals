@@ -5,8 +5,7 @@ import { Category, CategoryRecord } from './db';
   providedIn: 'root'
 })
 export class AppService {
-  // readonly today = this.getPersonalLocalTZ().toISOString().split('T')[0];
-  readonly today = new Date().toISOString().split('T')[0];
+  readonly today = signal<string>(new Date().toISOString().split('T')[0]);
   readonly categories = signal<Category[]>([]);
   readonly categoryWeights = computed<MinMax>(() => {
     const weights = this.categories().map(c => c.weight);
@@ -15,7 +14,7 @@ export class AppService {
     return { min, max } as MinMax;
   });
 
-  readonly selectedDate = signal<string>(this.today);
+  readonly selectedDate = signal<string>(this.today());
   readonly dayOfWeek = computed<Date>(() => new Date(this.selectedDate()));
 
   readonly selectedDateRecords = signal<CategoryRecord[]>([]);
@@ -42,11 +41,6 @@ export class AppService {
       const bWeight: number = mappedForSortCategories.find(c => c.id === b.categoryId)!.weight!;
       return Math.abs(aWeight) - Math.abs(bWeight);
     }
-  }
-
-  private getPersonalLocalTZ(): Date {
-    const ms3Hours = 3 * 60 * 60 * 1000;
-    return new Date(new Date().getTime() + ms3Hours);
   }
 }
 

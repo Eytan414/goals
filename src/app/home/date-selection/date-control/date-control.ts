@@ -13,7 +13,7 @@ import { FormsModule } from '@angular/forms';
 export class DateControl {
   protected readonly appService = inject(AppService);
   protected readonly isTodaySelected = computed<boolean>(() => 
-    this.appService.selectedDate() === this.appService.today
+    this.appService.selectedDate() === this.appService.today()
   );
 
   protected onDateChange(selectedDate: Event) {
@@ -22,6 +22,6 @@ export class DateControl {
   }
 
   protected jumpToToday(){
-    this.appService.selectedDate.set(this.appService.today);
+    this.appService.selectedDate.set(this.appService.today());
   }
 }

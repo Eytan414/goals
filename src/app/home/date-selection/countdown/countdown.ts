@@ -23,20 +23,23 @@ export class Countdown {
 
       const result = `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
       if (result === '23:59:59') {//auto change date on day end
-        this.appService.selectedDate.set(new Date().toISOString().split('T')[0]);
+        this.appService.today.set(new Date().toISOString().split('T')[0]);
+        this.appService.selectedDate.set(this.appService.today());
       }
       return result;
     })
   );
 
   private getNextMidnight(now: Date) {
+    const OFFSET = -3;
     return Date.UTC(
       now.getUTCFullYear(),
       now.getUTCMonth(),
-      now.getUTCDate() + 1
+      now.getUTCDate() + 1,
+      OFFSET
     );
   }
-  
+
   private getTimeParts(msLeft: number) {
     const hours = Math.floor(msLeft / ONE_HOUR);
     const minutes = Math.floor((msLeft % ONE_HOUR) / ONE_MINUTE);

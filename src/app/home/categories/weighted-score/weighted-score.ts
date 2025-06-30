@@ -21,7 +21,7 @@ export class WeightedScore {
 
   private calculateExtremaScoresEffect = effect(() => {
     this.appService.actionCount();
-    this.db.getExtremaScores()
+    this.db.getExtremaScores();
   });
 
   protected formattedExtrema() {

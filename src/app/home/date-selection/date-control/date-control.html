@@ -10,7 +10,7 @@
         <input type="date" name="date" 
             [(ngModel)]="appService.selectedDate" 
             (ngModelChange)="onDateChange($event)"
-            [max]="appService.today" />
+            [max]="appService.today()" />
     </label>
 
 </main>

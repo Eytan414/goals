@@ -1,9 +1,9 @@
 <main>
     @let records = appService.sortedDateRecords();
     @for(r of records; track r.id){
-    @let _categories = appService.categories();
+    <!-- @let _categories = appService.categories(); -->
     <!-- 
-    hack to trigger CD to avoid:
+    hack to trigger CD when categories() updates to avoid:
     looping over selectedDateRecords() && categories() signals 
     like in computed/etc which are heavier 
     -->
